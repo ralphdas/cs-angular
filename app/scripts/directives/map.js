@@ -92,6 +92,11 @@ angular.module('coffeeshotsApp')
 	    });
 
 	   $scope.$on('leafletDirectiveMarker.click', function(event, data){
+	   		console.log(data.model.shooterId);
+	   		if(data.model.shooterId === 999999){
+	   			return;
+
+	   		}
 	   		var selectedShooter = shooters[data.model.shooterId];
 	   		$scope.$emit('open_details_dialog', selectedShooter);
 
