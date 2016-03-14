@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'btford.socket-io',
     'ngDialog',
-    'leaflet-directive'
+    'leaflet-directive',
+    'ngCordova'
   ])
   
   .run(function($rootScope, $route){

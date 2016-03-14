@@ -11,7 +11,7 @@ angular.module('coffeeshotsApp')
     return {
      
       restrict: 'AC',
-      controller: function ($scope, API, IPtoGeo, Geocode, $timeout) {
+      controller: function ($scope, API, IPtoGeo, Geocode, $timeout, $cordovaGeolocation) {
        	var accessTokenMapBox = 'pk.eyJ1IjoicmFscGhkYXMiLCJhIjoiT0ZUTXZqRSJ9.xNuIp977fBIZciLU967q5A';
 	    var mapBoxMapId = 'ralphdas.77660109';
 	    var shooters = [];
@@ -22,6 +22,35 @@ angular.module('coffeeshotsApp')
 	    	$scope.markers = createMarkers(data);
 	    	$scope.$parent.shooters = data;
 	    });
+
+	    $scope.geoLocateMe = function(){
+	    	var posOptions = {timeout: 10000, enableHighAccuracy: false};
+	    	$cordovaGeolocation .getCurrentPosition(posOptions).then(
+	    		function (position) {
+	    		  var lat  = position.coords.latitude;
+			      var long = position.coords.longitude;
+
+			      
+		      	 	$scope.centerPoint =  {
+			            lat: lat,
+			            lng: long,
+			            zoom: 14
+			        }
+
+			        for (var i = 0; i < $scope.markers.length; i++) {
+			        	if($scope.markers[i].shooterId === 999999){
+			        		$scope.markers.splice(i, 1);
+			        	}
+			        }
+			        $scope.markers.push(createCurrentPosMarker(lat, long));
+
+			      
+
+			    }, function(err) {
+			      // error
+			      window.alert('Oops! Could not determine geolocation. Please try again later...');
+			    });
+	    }
 
 	    var typeDebounce;
 	    $scope.onAddressInput = function(){
@@ -68,7 +97,25 @@ angular.module('coffeeshotsApp')
 
 	   });
 	   		
-	   		
+	   function createCurrentPosMarker(_lat, _lng){
+	   		var marker = {
+	    				lat: _lat,
+                        lng: _lng,
+                        focus: true,
+                        	
+                        draggable: false,
+                        shooterId: 999999,
+                        icon: {
+						    type: 'div',
+						    className: 'marker-current-pos',
+						    iconSize: null,
+						    html: '<div></div>'
+
+						}
+                        
+	    	}
+	    	return marker;
+	   }
 
 	   
 
