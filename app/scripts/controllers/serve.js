@@ -14,7 +14,7 @@ angular.module('coffeeshotsApp')
      		$scope.currentUser = _userDetails;
      	});
      });
-
+    // TODO move to dialogs controller
     $scope.showDialog = function(_type){
     	var templateUrl;
     	if(_type == 'address'){

@@ -22,8 +22,17 @@ angular
     'ngCordova'
   ])
   
-  .run(function($rootScope, $route){
-    
+  .run(function($rootScope, $route, API){
+    $rootScope.$on('user.me_reply', function(event, _userDetails){
+        $rootScope.$apply(function(){
+            $rootScope.currentUser = _userDetails;
+            
+        });
+
+     });
+    API.getCurrrentUser();
+
+
     $rootScope.$on('$routeChangeSuccess', function(){
       if ($route.current.$$route.hideBar && $route.current.$$route.hideBar === true){
         $rootScope.hideBar = true;

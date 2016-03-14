@@ -1,12 +1,15 @@
 <div class="welcome">
 	<div class="row grey">
 		<div class="col-xs-12 text-center">
-			<img src="images/exampleuser.jpg" alt="" style="position: relative; top: 55px; " class="user-avatar large grey-border"> </div>
+			<img ng-src="{{currentUser.image}}" alt="" style="position: relative; top: 55px; " class="user-avatar large grey-border"> </div>
 	</div>
 	<div class="row">
 		<div class="col-xs-12" style="margin-top: 55px" >
-			<h1 class="label-title">Welcome {{currentuser.firstname}} {{currentuser.lastname}}</h1>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto saepe tempore at, numquam inventore ipsum? Animi cupiditate accusantium velit placeat totam vitae dolorem, quis, aspernatur ipsa sint fugit esse accusamus.</p>
+			<h1 class="label-title">Welcome {{currentUser.firstname}}! </h1>
+			<p> Thank you for joining the honest coffee movement! Use the <b>GET COFFEE</b> button to 
+				get a coffee at a home barista in your neighborhood. Complete your profile at the <b>ME</b> 
+				button or enlist as a home barista at the <b>SERVE COFFEE</b> button. Enjoy great coffees 
+				and interesting encounters and support the coffee farmers at the same time!</p>
 			<br>
 			<br>
 			<button ng-click="welcome.continue()" class="btn btn-lg btn-block green">

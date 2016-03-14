@@ -8,7 +8,8 @@
  * Controller of the coffeeshotsApp
  */
 angular.module('coffeeshotsApp')
-  .controller('WelcomeCtrl', function ($location) {
+  .controller('WelcomeCtrl', function ($scope, $location) {
+    
     this.continue = function(){
     	$location.path('/drink');
     }
