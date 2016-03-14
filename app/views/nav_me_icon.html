@@ -1,5 +1,5 @@
 <div ng-class="{'active': active == true }" class="icon-container me">
-	<img src="images/exampleuser.jpg" class="user-avatar">
+	<img ng-src="{{$root.currentUser.image}}" class="user-avatar">
 	<span class="nav-icon-label">Me</span>
 	<div class="select-block"></div>
 </div>

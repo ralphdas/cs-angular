@@ -31,7 +31,7 @@ angular.module('coffeeshotsApp')
 
             bioPopup.closePromise.then(function(data){
                 if(data.value){
-                    $rootScope.currentUser.bio = data.value;
+                    $rootScope.currentUser.bio = data.value;    
                 }
             });
         }); 
