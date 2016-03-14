@@ -1,0 +1,44 @@
+.btn.facebook{
+	background: #3B5998;
+	color: #FFF;
+}
+.btn.green{
+	background: #059D7F;
+	color: #FFF;
+}
+.btn.blue{
+	background: #0CA7BB;
+	color: #FFF;
+}
+img.btn-logo {
+    position: absolute;
+    left: 15px;
+}
+.btn{
+	font-size: 14px;
+    height: 55px;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-family: Avenir, Roboto, "sans-serif";
+    letter-spacing: 1px;
+    font-weight: 500;
+    position: relative;
+    background: #EDECEC;
+}
+.edit-btn {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    right: 10px;
+    margin-top: -30px;
+    background: url('../images/editicon.svg'),#FFF;
+    border-radius: 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.btn-group{
+    width: 100%;
+}
+.btn-block + .btn-block{
+    margin-top: 0;
+}

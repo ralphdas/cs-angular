@@ -1,0 +1,21 @@
+.form-control:focus{
+    box-shadow: none;
+    background: #B0BEC0;
+    color: #000;
+}
+.form-control:focus::-webkit-input-placeholder{
+    color: #000;
+}
+
+	
+.form-control{
+	background: #F2F2F2;
+    border-radius: 0;
+    font-family: Avenir, Roboto, "sans-serif";
+    color: #909DA3;
+    border: none;
+    height: 50px;
+    box-shadow: none;
+    font-weight: 500;
+    transition: all 0.25s ease-out;
+}

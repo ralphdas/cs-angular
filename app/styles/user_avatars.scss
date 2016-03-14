@@ -1,0 +1,32 @@
+
+.user-avatar{
+	width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border: 5px solid #FFF;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.32);
+
+    &.medium{
+        width: 65px;
+        height: 65px;
+        border: 2px solid #FFF;
+    }
+    &.small{
+        width: 50px;
+        height: 50px;
+        border: 2px solid #FFF;
+        margin: 0;
+    }
+}
+
+.navigation .user-avatar{
+	width: 70px;
+    height: 70px;
+    margin: 0;
+    display: inline-block;
+    margin-bottom: 3px;
+    box-shadow: none;
+    border: 5px solid #FFF;
+}

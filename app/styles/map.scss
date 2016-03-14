@@ -1,0 +1,58 @@
+.map-icon{
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	border: 2px solid #9D2505;
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.5);
+	margin-left: -25px;
+	margin-top: -25px;
+}
+.map{
+	position: fixed;
+	top: 120px;
+	width: 100%;
+	
+}
+
+button.map-button {
+    position: absolute;
+    top: 40px;
+    z-index: 200;
+    width: 40px;
+    height: 40px;
+    border: none;
+    
+
+    &.search{
+        background: url("../images/searchloop.svg");
+        background-size: cover;
+    }
+    &.geocode{
+        background: url("../images/geolocate.svg");
+        background-size: cover;
+    }
+   
+    &.left{
+    	left: 15px;
+    }
+    &.right{
+    	right: 15px;
+    }
+    
+}
+input.map-input{
+	position: absolute;
+    top: 40px;
+    z-index: 2001;
+    border: 0;
+    color: #FFF;
+    background: rgba(0, 0, 0, 0.69);
+    border-radius: 50px;
+    height: 40px;
+    width: calc(100% - 140px);
+    box-sizing: border-box;
+    margin-left: 68px;
+    padding-left: 20px;
+    font-family: Avenir, Roboto, "sans-serif";
+    letter-spacing: 0.6px;
+}

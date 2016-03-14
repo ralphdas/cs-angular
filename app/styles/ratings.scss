@@ -1,0 +1,29 @@
+.rating{
+	display: block;
+	width: 115px;
+	height: 20px;
+	display: inline;
+}
+.rating .star{
+	display: inline-block;
+}
+.rating .star svg{
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	margin-left: 2px;
+
+}
+.rating .star.selected svg *{
+	fill: #6A635C;
+}
+.rating .star svg *{
+	fill: #E2DED9;
+}
+
+.rating .star.white-rating.selected svg *{
+	fill: #FFF;
+}
+.rating .star.white-rating svg *{
+	fill: #A9A9A9;
+}

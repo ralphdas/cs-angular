@@ -1,0 +1,43 @@
+<div class="row">
+	<ul class="nav nav-tabs stick-to-topbar">
+		  <li ng-init="registerTab('map', true)" ng-class="{'active':selectedTab == 'map'}">
+		  	<a ng-click="selectTab('map')">
+		  		Map
+		  	</a>
+		  </li>
+		  <li ng-init="registerTab('list')" ng-class="{'active':selectedTab == 'list'}">
+		  	<a ng-click="selectTab('list')">
+		  		List
+		  	</a>
+		  </li>
+
+	</ul>
+
+	<ul class="nav nav-content">
+			<li ng-init="registerTab('map')" ng-if="selectedTab == 'map'" class="nav-content">
+				<div class="map">
+				    <div class="wrapper" ng-init="showAddressInput = false">
+				    	 <button ng-click="showAddressInput = !showAddressInput" class="map-button search left">
+				    				&nbsp;
+					    </button>
+					    <input type="text" ng-show="showAddressInput" ng-model="addressInput" ng-change="onAddressInput()" placeholder="Address or Placename" class="map-input">
+					    <button class="map-button geocode right">
+				    				&nbsp;
+					    </button>
+
+
+				    </div>
+				   
+					<leaflet style="width: 100%; height: 100vh;" markers="markers" event-broadcast="events" center="centerPoint" defaults="defaults"></leaflet>
+				</div>
+			</li>
+			<li ng-init="registerTab('list')" ng-if="selectedTab == 'list'" class="nav-content">
+				<div class="shooter-list">
+				</div>
+					
+
+			</li>
+	</ul>
+	
+		
+</div>

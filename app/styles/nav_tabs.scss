@@ -1,0 +1,36 @@
+.nav-tabs > li{
+	width: 50%;
+	height: 55px;
+    text-align: center;
+    background: #E2DED9;
+}
+.nav-tabs{
+	border: none;
+    .label{
+        background: rgb(195, 191, 187);
+        margin-left: 3px;
+        position: relative;
+        top: -1px;
+        font-family: Avenir, Roboto, "sans-serif";
+        font-weight: 600;
+    }
+}
+.nav-tabs li a {
+	border: none;
+    border-radius: 0;
+    height: 55px;
+    padding-top: 15px;
+    font-family: Avenir, Roboto, "sans-serif";
+    color: #000;
+    transition: all 0.25s ease-out;
+}
+.nav-tabs.flipped > li.active > a, .nav-tabs.flipped > li.active > a:hover {
+    border: none;
+    border-top: 4px solid #9D2505;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+    border: none;
+    border-bottom: 4px solid #9D2505;
+}
+
+

@@ -1,0 +1,16 @@
+<div class="list-container padded-top">
+	<div ng-repeat="shooter in $parent.shooters" class="media" ng-click="selectShooter(shooter)">
+	  <div class="media-left">
+	    <a href="#">
+	      <img class="user-avatar small" ng-src="{{shooter.image}}" alt="...">
+	    </a>
+	  </div>
+	  <div class="media-body">
+	    <h4 class="label-title">{{shooter.firstname}} {{shooter.lastname}}</h4>
+	    <span class="right-float"><p class="small">{{shooter.shooter.openUntill | timeRemaining}}</p></span>
+	    <p class="no-wrap">{{shooter.shooter.address.street}}, {{shooter.shooter.address.postal_code}} {{shooter.shooter.address.city}}</p>
+	    <div class="rating" rating-value="{{shooter.shooter.stats.stars}}"></div>
+	  </div>
+	</div>
+
+</div>

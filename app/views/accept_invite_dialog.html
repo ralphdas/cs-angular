@@ -1,0 +1,25 @@
+<div class="row dark-bean-pattern-bg">
+	<div class="col-xs-12 text-center">
+		<button ng-click="closeThisDialog()" class="close-button pull-right"></button>
+		<img ng-src="{{user.image}}" alt="" class="user-avatar">
+		<h1 class="large-title white">{{user.firstname}} {{user.lastname}}</h1>
+	</div>
+</div>
+
+	<div class="col-xs-12">
+		<h4 class="label-title">Accept open invite?</h4>
+		<p>{{user.firstname}} {{user.lastname}} wants to visit you. Accept him or her?</p>
+	
+	</div>
+
+	<div class="btn-group stick-to-bottom">
+		<button class="btn col-xs-6">
+				Deny 
+		</button>
+
+		<button class="btn col-xs-6 green">
+				Accept
+		</button>
+	</div>
+
+		

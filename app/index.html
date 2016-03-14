@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>CoffeeShots</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
+    <link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+   
+  </head>
+  <body ng-app="coffeeshotsApp" ng-controller="DialogsCtrl">
+    
+
+
+    <div ng-hide="hideBar" class="topheader container-fluid">
+        
+    </div> 
+
+    
+    <div ng-class="{'bar-padding': !hideBar}" class="container-fluid" ng-view=""></div>
+    
+
+    <div ng-hide="hideBar" class="navigation">
+        <div class="drink-icon"></div>
+        <div class="me-icon"></div>
+        <div class="serve-icon"></div>
+    </div>
+
+   
+
+    <script src="//localhost:3000/socket.io/socket.io.js"></script>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-socket-io/socket.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
+    <script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/services/api.js"></script>
+        <script src="scripts/controllers/launch.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/drink.js"></script>
+        <script src="scripts/controllers/me.js"></script>
+        <script src="scripts/controllers/serve.js"></script>
+        <script src="scripts/directives/navtabs.js"></script>
+        <script src="scripts/directives/navcontent.js"></script>
+        <script src="scripts/controllers/welcome.js"></script>
+        <script src="scripts/directives/topheader.js"></script>
+        <script src="scripts/directives/drinkicon.js"></script>
+        <script src="scripts/directives/serveicon.js"></script>
+        <script src="scripts/directives/meicon.js"></script>
+        <script src="scripts/directives/map.js"></script>
+        <script src="scripts/services/iptogeo.js"></script>
+        <script src="scripts/directives/rating.js"></script>
+        <script src="scripts/directives/dashcounter.js"></script>
+        <script src="scripts/filters/timeremaining.js"></script>
+        <script src="scripts/filters/hourandminutes.js"></script>
+        <script src="scripts/directives/shooterlist.js"></script>
+        <script src="scripts/directives/reviews.js"></script>
+        <script src="scripts/directives/distancedisplay.js"></script>
+        <script src="scripts/directives/timedisplay.js"></script>
+        <script src="scripts/directives/staticmap.js"></script>
+        <script src="scripts/directives/openinvites.js"></script>
+        <script src="scripts/directives/guests.js"></script>
+        <script src="scripts/controllers/dialogs.js"></script>
+        <script src="scripts/directives/alertspopover.js"></script>
+        <script src="scripts/filters/timeago.js"></script>
+       
+        <script src="scripts/services/geocode.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

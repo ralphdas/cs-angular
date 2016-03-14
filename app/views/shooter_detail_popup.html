@@ -1,0 +1,54 @@
+<div class="row dark-bean-pattern-bg">
+	<div class="col-xs-12 text-center">
+		<button ng-click="closeThisDialog()" class="close-button pull-right"></button>
+		<img ng-src="{{user.image}}" alt="" class="user-avatar">
+		<h1 class="large-title white">{{user.firstname}} {{user.lastname}}</h1>
+		<div class="rating" rating-value="{{user.shooter.stats.stars}}" white="true"></div>
+
+	</div>
+</div>
+
+	<div class="col-xs-12 scroll-box">
+		<div dash-value="{{user.shooter.stats.guests}}" dash-label="GUESTS (±)" class="dash-counter clearfix"></div>
+		<div dash-value="{{user.shooter.stats.cups_served}}" dash-label="CUPS SERVED" class="dash-counter clearfix"></div>
+		<div dash-value="{{user.shooter.stats.revenue}}" dash-label="FARMER
+PROFITS EURO (±)" class="dash-counter clearfix"></div>
+		<h1 class="label-title upper">About</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At sed iste inventore, saepe eveniet rerum blanditiis soluta nostrum incidunt suscipit! Enim quas consequatur nihil nostrum, dignissimos earum nulla, necessitatibus ipsa!</p>
+		<h1 class="label-title upper">Address</h1>
+		<p>{{user.shooter.address.street}}, {{user.shooter.address.postal_code}} {{user.shooter.address.city}}</p>
+		
+
+		<h1 class="label-title upper">Time</h1>
+		<p>Serving untill {{user.shooter.openUntill | hourAndMinutes}}, {{user.shooter.openUntill | timeRemaining}} remaining</p>
+
+		<h1 class="label-title upper">Machine</h1>
+		<p>Test Machine</p>
+
+		<h1 class="label-title upper">Reviews</h1>
+		<div ng-repeat="review in user.shooter.reviews" class="row">
+			
+				<img ng-src="{{review.image}}" alt="" style="float: left; margin-left: 15px; margin-right: 15px;" class="user-avatar small">
+				<div class="rating" style="float:left; margin-left: -3px;" rating-value="{{review.stars}}"></div>
+				<div style="float:left" ><p class="small" >{{review.username}}, {{review.date}}</p></div>
+			
+			<div class="col-xs-12" style="padding-left: 80px; margin-top: -9px;" > <p>{{review.description}}</p> </div>
+		</div>
+				
+				
+				
+			
+
+		
+		
+	</div>
+	<button class="btn btn-block green">
+			request visit
+	</button>
+
+
+
+
+	
+</div>
+

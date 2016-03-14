@@ -1,0 +1,36 @@
+@keyframes bounceIn {
+  20% {
+    transform: scale3d(.85, .85, .85);
+  }
+
+  50%, 55% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+
+@keyframes bounceOut {
+  20% {
+    transform: scale3d(.9, .9, .9);
+  }
+
+  50%, 55% {
+    opacity: 1;
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale3d(.3, .3, .3);
+  }
+}
+@keyframes backgroundScroll {
+  from {background-position: 0 0;}
+  to {background-position: -300px 0;}
+}

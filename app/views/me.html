@@ -1,0 +1,85 @@
+<div class="row light-bean-pattern-bg">
+	<div class="col-xs-12 text-center">
+		<img ng-src="{{currentUser.image}}" alt="" class="user-avatar">
+		<h1 class="large-title">{{currentUser.firstname}} {{currentUser.lastname}}</h1>
+	</div>
+</div>
+<div class="row scroll-container">
+	<div class="col-xs-12">
+		<h1 class="label-title upper">Stats</h1>
+		<div class="wrapper clearfix text-center">
+			<div dash-size="large" dash-format="currency" dash-value="{{currentUser.shooter.stats.revenue * 0.35}}" dash-label="FARMER
+PROFITS EURO (±)" class="dash-counter clearfix"></div>
+		</div>
+		<div class="wrapper clearfix text-center">
+			<div dash-value="{{currentUser.shooter.stats.cups_served}}" dash-label="Cups Served" class="dash-counter clearfix"></div>
+			
+			<div dash-value="{{currentUser.shooter.stats.revenue}}" dash-format="currency" dash-label="Revenue" class="dash-counter clearfix"></div>
+			
+			<div dash-value="{{currentUser.shooter.stats.serving_sessions}}" dash-label="Serving Sessions" class="dash-counter clearfix"></div>
+			
+		</div>
+		<div class="wrapper clearfix text-center">
+			<div dash-value="{{currentUser.shooter.stats.guests}}" dash-label="Guests" class="dash-counter clearfix"></div>
+			
+			<div dash-value="{{currentUser.shooter.stats.returning_guests}}" dash-label="Returning Guests" class="dash-counter clearfix"></div>
+			
+			<div dash-value="{{currentUser.shooter.stats.reviews}}" dash-label="Reviews" class="dash-counter clearfix"></div>
+			
+		</div>
+		<div class="wrapper clearfix text-center">
+			<div dash-value="{{currentUser.stats.cups_drunk}}" dash-label="Cups Drunk" class="dash-counter clearfix"></div>
+			
+			<div dash-value="{{currentUser.stats.shooter_visited}}" dash-label="Baristas visited" class="dash-counter clearfix"></div>
+			
+			<div dash-value="{{currentUser.stats.drinking_cost}}" dash-format="currency" dash-label="Drinking Costs" class="dash-counter clearfix"></div>
+
+			
+
+			</div>
+			
+		</div>
+		<div class="col-xs-12">
+			<h1 class="label-title upper">Reviews</h1>
+			<div class="reviews" review-source="currentUser.shooter.reviews"></div>
+		</div>
+		<div class="col-xs-12">
+			<h1 class="label-title upper">Settings</h1>
+		</div>
+		<ul class="list-items">
+			<li class="list-item">
+				<p>Distance Units</p>
+				<div class="distance-display"></div>
+			</li>
+			<li class="list-item">
+				<p>Time</p>
+				<div class="time-display"></div>
+			</li>
+		</ul>
+
+		<ul class="list-items">
+			<li class="list-item">
+				<a href="http://www.coffeeshots.nl" target="_blank">
+					<p>Visit our website</p>
+					<div class="navout-arrow"></div>
+				</a>
+					
+			</li>
+			<li class="list-item">
+				<a href="http://www.coffeeshots.nl" target="_blank">
+					<p>Privacy Statement</p>
+					<div class="navout-arrow"></div>
+				</a>
+					
+			</li>
+			<li class="list-item">
+				<a href="http://www.coffeeshots.nl" target="_blank">
+					<p>Contact us</p>
+					<div class="navout-arrow"></div>
+				</a>
+					
+			</li>
+		</ul>
+
+	</div>
+	

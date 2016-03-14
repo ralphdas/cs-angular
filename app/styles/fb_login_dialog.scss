@@ -1,0 +1,57 @@
+
+
+
+.fb-login-dialog .ngdialog-overlay{
+	background: rgba(255, 255, 255, 0.8);
+}
+.fb-login-dialog .facebook-logo {
+    margin: 20px auto;
+    width: 135px;
+    display: block;
+}
+.fb-login-dialog .ngdialog-content{
+	
+	background: #3B5998;
+	margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+	animation: bounceIn 0.5s;
+	height: 300px;
+  width: 300px;
+
+}
+.ngdialog.fb-login-dialog.ngdialog-closing .ngdialog-content{
+	animation: bounceOut 0.5s;
+}
+
+.fb-login-dialog .ngdialog-close{
+	display: none;
+}
+.fb-login-dialog .close-button {
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: -22px;
+    border: none;
+    background: url('../images/closeicon.svg');
+    background-size: cover;
+    height: 12px;
+    width: 12px;
+    background-repeat: no-repeat;
+}
+
+.fb-login-dialog h1.label-title{
+	color: #8C9BBC;
+}
+
+.fb-login-dialog .form-control{
+	background: #324E87;
+	color: #FFF;
+}
+.fb-login-dialog .form-control:focus::-webkit-input-placeholder{
+	color: #FFF;
+}
+
+.fb-login-dialog  button.blue-light {
+    background: #576EA2;
+    color: #FFF;
+}

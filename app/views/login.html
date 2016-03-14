@@ -1,0 +1,89 @@
+<div class="row grey">
+	<div class="col-xs-12">
+		<h1 class="label-title">Welcome to Coffee Shots</h1>
+		<p>Please login using one of the following methods.</p>
+
+		<button ng-click="login.activateFacebookPopup()" class="btn btn-lg btn-block facebook">
+			<img src="images/facebookbuttonlogowhite.svg" class="btn-logo" width="10">
+			Facebook Sign-in
+		</button>
+		<div class="col-xs-12 text-center">
+			<span class="badge login-or">OR</span>
+		</div>
+	</div>
+</div>
+
+
+<div class="row" style="margin-top: 40px;">
+
+
+	<div class="col-xs-12">
+		<ul class="nav nav-content">
+			<li ng-init="registerTab('login')" ng-show="selectedTab == 'login'" class="nav-content">
+				<div class="form-group">
+				  <input type="text" ng-model="loginInput.email" class="form-control" placeholder="E-mail address">
+				</div>
+				<div class="form-group">
+				  <input type="password" ng-model="loginInput.password" class="form-control" placeholder="Password">
+				</div>
+				<button ng-click="login.loginUser()" class="btn btn-lg btn-block blue">Login now</button>
+			</li>
+				  
+				 
+			<li ng-init="registerTab('register')" ng-show="selectedTab == 'register'" class="nav nav-content">
+				<div class="row">
+					<div class="col-xs-6">
+						<div class="form-group">
+						  <input type="text" ng-model="registerInput.firstname" class="form-control" placeholder="Firstname">
+						</div>
+					</div>
+					<div class="col-xs-6">
+						<div class="form-group">
+						  <input type="text" ng-model="registerInput.lastname" class="form-control" placeholder="Lastname">
+						</div>
+					</div>
+
+
+
+				</div>
+				
+				
+				<div class="form-group">
+				  <input type="text" ng-model="registerInput.email" class="form-control" placeholder="E-mail address">
+				</div>
+				<div class="form-group">
+				  <input type="password" ng-model="registerInput.password" class="form-control" placeholder="Password (min 8 chars.)">
+				</div>
+				<button ng-click="login.registerUser()" class="btn btn-lg btn-block green">Create new Account</button>
+			</li>
+
+		</ul>
+
+	</div>
+		
+	
+	
+	
+	<ul class="nav nav-tabs stick-to-bottom">
+		  <li ng-init="registerTab('login')" ng-class="{'active':selectedTab == 'login'}">
+		  	<a ng-click="selectTab('login')">
+		  		Login
+		  	</a>
+		  </li>
+		  <li ng-init="registerTab('register')" ng-class="{'active':selectedTab == 'register'}">
+		  	<a ng-click="selectTab('register')">
+		  		Register
+		  	</a>
+		  </li>
+
+	</ul>
+	  
+	  
+
+
+
+
+
+	
+	
+</div>

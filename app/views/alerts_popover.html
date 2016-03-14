@@ -1,0 +1,31 @@
+<div class="alert-counter">
+	{{alerts.length}}
+</div>
+<div class="alert-icon">
+	&nbsp;
+</div>
+<div ng-class="{'not-showing':!isVisible}" ng-hide="!isVisible" class="alerts-container">
+	<div class="scroll-container">
+		<div class="list-container">
+			<div ng-repeat="alert in alerts" class="media" ng-click="selectAlert(alert)">
+			  <div class="media-left">
+			    <a href="#">
+			      <img class="user-avatar small" ng-src="{{alert.sender.image}}" alt="...">
+			    </a>
+			  </div>
+			  <div class="media-body">
+			    <h4 class="label-title">{{alert.title}}</h4>
+			    <p class="no-wrap">{{alert.sender.firstname}} {{alert.sender.lastname}}</p>
+			    <p class="grey no-wrap">{{alert.date | timeAgo}}</p>
+			  </div>
+			</div>
+		</div>
+		
+	
+	</div>
+</div>
+<div class="alert-shield" ng-hide="!isVisible">
+	&nbsp;
+</div>
+		    
+		   

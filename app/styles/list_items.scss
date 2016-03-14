@@ -1,0 +1,44 @@
+.list-items{
+	padding: 0;
+	width: 100%;
+	list-style: none;
+	display: block;
+    float: left;
+    margin-bottom: 20px;
+	.list-item{
+		border-bottom: 1px solid #CCC;
+	    border-top: 1px solid #CCC;
+	    padding-top: 10px;
+	    padding-left: 15px;
+	    margin-top: -1px;
+	}
+	p{
+		display: block;
+	}
+	.list-setting{
+		width: 150px;
+	    font-family: Avenir, Roboto, "sans-serif";
+	    margin-top: -30px;
+	    text-align: right;
+	    padding-right: 15px;
+
+		.setting{
+			display: inline-block;
+			margin-left: 15px;
+			color: #CCC;
+
+			&.selected{
+				color: #000
+			}
+		}
+	}
+	.navout-arrow{
+		float: right;
+		margin-right: 10px;
+		background: url('../images/arrowright.svg');
+		background-size: cover;
+		width: 9px;
+		height: 16px;
+		margin-top: -28px;
+	}
+}

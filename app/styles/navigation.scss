@@ -1,0 +1,57 @@
+.navigation {
+    position: fixed;
+    height: 90px;
+    background: #FFF;
+    bottom: 0px;
+    width: 100%;
+    z-index: 2000;
+    box-shadow: 1px -3px 14px rgba(0, 0, 0, 0.12);
+}
+.navigation .icon-container{
+	position: absolute;
+	top: 10px;
+	width: 100px;
+	cursor: pointer;
+}
+.navigation .icon-container.drink{
+	left: 20px;
+}
+.navigation .icon-container.serve{
+    right: 20px;
+}
+.navigation .icon-container.me {
+    left: 50%;
+    margin-left: -50px;
+    top: -10px;
+    text-align: center;
+    
+}
+
+.navigation .nav-icon {
+	text-align: center;
+	
+}
+.navigation .nav-icon svg{
+	display: inline-block;
+	height: 47px;
+	width: auto;
+}
+.navigation .icon-container.active svg * {
+	fill: #000;
+	
+}
+
+.navigation .icon-container .select-block {
+    display: block;
+    width: 60px;
+    height: 5px;
+    background: #9D2505;
+    margin: 2px auto;
+    transform: translateY(10px);
+    transition: all 0.25s ease-out;
+    opacity: 0;
+}
+.navigation .icon-container.active .select-block{
+	 transform: translateY(0px);
+     opacity: 1;
+}

@@ -1,0 +1,68 @@
+<div class="row static-map" lat="{{currentUser.shooter.address.geo.lat}}" lng="{{currentUser.shooter.address.geo.lng}}">
+	<div class="col-xs-12 text-center">
+		<img ng-src="{{currentUser.image}}" alt="" class="user-avatar">
+		<h1 class="large-title">{{currentUser.firstname}} {{currentUser.lastname}}</h1>
+	</div>
+</div>
+<div class="row scroll-container">
+	<ul class="nav nav-tabs" flipped="true" ng-class="{'flipped': flipped}">
+		  <li ng-init="registerTab('details', true)" ng-class="{'active':selectedTab == 'details'}">
+		  	<a ng-click="selectTab('details')">
+		  		Details
+		  	</a>
+		  </li>
+		  <li ng-init="registerTab('guests')" ng-class="{'active':selectedTab == 'guests'}">
+		  	<a ng-click="selectTab('guests')">
+		  		Guests <span class="label">{{currentUser.shooter.guests.length}}</span>
+		  	</a>
+		  </li>
+
+	</ul>
+	<ul class="nav nav-content">
+			<li ng-init="registerTab('details')" ng-if="selectedTab == 'details'" class="nav-content">
+				<div class="col-xs-12">
+					<h1 class="label-title upper">Address</h1>
+					<button ng-click="showDialog('address')" class="btn edit-btn"></button>
+					<p class="grey" ng-if="currentUser.shooter.address.street === ''">Not set yet</p>
+
+					<p ng-if="currentUser.shooter.address.street !== ''">{{currentUser.shooter.address.street}} {{currentUser.shooter.address.postal_code}} {{currentUser.shooter.address.city}}</p>
+
+
+
+					<h1 class="label-title upper">End Time</h1>
+					<button ng-click="showDialog('time')" class="btn edit-btn"></button>
+					
+					<p class="grey" ng-if="currentUser.shooter.openUntill === 0">Not set yet</p>
+					<p ng-if="currentUser.shooter.openUntill !== 0">Open untill {{(currentUser.shooter.openUntill * 1000) | date : 'HH:MM dd/MM/yyyy'}}</p>
+
+					<h1 class="label-title upper">Description</h1>
+					<button ng-click="showDialog('description')" class="btn edit-btn"></button>
+					<p class="grey" ng-if="currentUser.shooter.description === ''">Not set yet</p>
+					<p ng-if="currentUser.shooter.description !== ''">{{currentUser.shooter.description}}
+					</p>
+
+				</div>
+			</li>
+			<li ng-init="registerTab('guests')" ng-if="selectedTab == 'guests'" class="nav-content">
+				<div class="col-xs-12">
+					<h1 class="label-title upper pull-left">Open Invites</h1>
+					<p class="small pull-right" style="margin-top: 15px;">Tap to accept</p>
+				</div>
+				<div class="open-invites" invites="currentUser.shooter.open_invites"></div>
+
+
+				<div class="col-xs-12">
+					<h1 class="label-title upper pull-left">Guests</h1>
+					<p class="small pull-right" style="margin-top: 15px;">Tap to add drinks</p>
+				</div>
+				<div class="guests" guests-src="currentUser.shooter.guests"></div>
+
+
+				
+
+			</li>
+
+	</ul>
+	<button class="btn btn-block stick-to-bottombar green">Start Serving</button>
+	
+</div>

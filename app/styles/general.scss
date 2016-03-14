@@ -1,0 +1,57 @@
+.stick-to-bottom{
+	position: absolute;
+    width: 100%;
+    bottom: 0px;
+    left: 0;
+}
+.stick-to-topbar{
+    position: fixed;
+    width: 100%;
+    top: 90px;
+    z-index: 30;
+}
+.stick-to-bottombar{
+    position: fixed !important;
+    bottom: 90px;
+}
+
+.dark-bean-pattern-bg{
+    background: url('../images/coffeebeanbackgrounddark.png');
+    background-size: cover;
+    box-shadow: inset 0px -5px 30px #000;
+    animation: backgroundScroll 40s linear infinite;
+}
+
+.light-bean-pattern-bg{
+    background: url('../images/coffeebeanbackground.png');
+    background-size: cover;
+    box-shadow: inset 0px -5px 30px #FFF;
+    animation: backgroundScroll 40s linear infinite;
+}
+.scroll-container{
+    padding-bottom: 140px;
+    background: #fff;
+}
+.vertical-scroll-container {
+    width: 200000px;
+}
+.row.grey{
+	background: #F2F2F2;
+}
+
+
+.login-or{
+    font-family: Avenir, Roboto, "sans-serif";
+    width: 39px;
+    font-size: 14px;
+    line-height: 1.4;
+    margin-top: 0px;
+    margin-bottom: 15px;
+    position: relative;
+    top: 30px;
+}
+
+.bar-padding {
+    padding-top: 90px;
+}
+

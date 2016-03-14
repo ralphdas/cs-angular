@@ -1,0 +1,18 @@
+.topheader {
+    border-top: 10px solid #752712;
+    height: 90px;
+    box-shadow: 1px 1px 14px rgba(0, 0, 0, 0.18);
+    position: fixed;
+    width: 100%;
+    background: #FFF;
+    z-index: 2001;
+}
+
+.topheader .coffeeshotslogo{
+    width: 176px;
+    margin-top: 30px;
+    margin-left: auto;
+    display: block;
+    margin-right: auto;
+}
+

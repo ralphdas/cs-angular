@@ -1,0 +1,34 @@
+$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+// bower:scss
+@import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+// endbower
+// 
+@import "general.scss";
+@import "dash_counter.scss";
+@import "ratings.scss";
+@import "animations.scss";
+@import "nav_tabs.scss";
+@import "map.scss";
+@import "button.scss";
+@import "form_controls.scss";
+@import "typography.scss";
+@import "user_avatars.scss";
+@import "navigation.scss";
+@import "topheader.scss";
+@import "fb_login_dialog.scss";
+@import "default_dialog.scss";
+@import "list_container.scss";
+@import "list_items.scss";
+@import "user_container.scss";
+@import "reviews.scss";
+@import "alert_popover.scss";
+
+
+body, html{
+	height: 100%;
+	outline: none;
+	background: #FFF;
+}
+:focus {
+  outline: 0;
+}

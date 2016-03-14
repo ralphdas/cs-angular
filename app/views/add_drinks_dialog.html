@@ -1,0 +1,38 @@
+<div class="row dark-bean-pattern-bg">
+	<div class="col-xs-12 text-center">
+		<button ng-click="closeThisDialog()" class="close-button pull-right"></button>
+		<img ng-src="{{user.image}}" alt="" class="user-avatar medium">
+		<h1 class="large-title white">{{user.firstname}} {{user.lastname}}</h1>
+	</div>
+</div>
+
+<div class="text-center">
+	<div dash-value="{{user.drinking_costs}}" dash-label="Total amount due" dash-format="currency" class="dash-counter clearfix"></div>
+
+	<div dash-value="{{user.cups_drunk}}" dash-label="Cups" class="dash-counter clearfix"></div>
+
+	
+</div>
+
+
+
+
+
+
+<div class="btn-group stick-to-bottom">
+	
+	<button class="btn col-xs-6">
+			Reset All  
+	</button>
+
+
+	<button class="btn blue col-xs-6">
+			Add Order 
+	</button>
+
+	<button class="btn btn-block green">
+			Request Payment
+	</button>
+</div>
+
+		

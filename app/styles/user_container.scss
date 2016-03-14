@@ -1,0 +1,31 @@
+.user-container{
+	float: left;
+    margin-right: 15px;
+    .user-avatar{
+    	margin-bottom: 5px;
+    }
+	 
+}
+.open-invites, .guests{
+	float: left;
+    width: 100%;
+    background: #F2F1F0;
+    overflow-x: scroll;
+    -webkit-overflow-x: scroll;
+    padding-left: 15px;
+}
+.cost-label {
+    background: #C95E41;
+    border: 2px solid #FFFFFF;
+    border-radius: 7px;
+    color: #FFF;
+    width: 68px;
+    margin-top: -28px;
+    position: relative;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin-left: 30px;
+    font-weight: 600;
+    font-family: Avenir, Roboto, "sans-serif";
+    font-size: 12px;
+}

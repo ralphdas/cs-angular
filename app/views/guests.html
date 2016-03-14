@@ -1,0 +1,9 @@
+<div class="vertical-scroll-container">
+	<div ng-repeat="user in guests" ng-click="showDrinksDialog(user)" class="user-container text-center">
+		<img ng-src="{{user.image}}" alt="" class="user-avatar">
+		<div class="cost-label">
+			{{user.drinking_costs | currency: '€'}}
+		</div>
+		<p>{{user.firstname}} {{user.lastname}}</p>
+	</div>
+</div>
