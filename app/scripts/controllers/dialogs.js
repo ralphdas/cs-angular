@@ -8,7 +8,7 @@
  * Controller of the coffeeshotsApp
  */
 angular.module('coffeeshotsApp')
-  .controller('DialogsCtrl', function ($scope, ngDialog) {
+  .controller('DialogsCtrl', function ($scope, ngDialog, $rootScope) {
    		$scope.$on('open_details_dialog', function(event, data){
     		var newScope = $scope.$new();
     		newScope.user = data;
@@ -18,6 +18,23 @@ angular.module('coffeeshotsApp')
     			className: 'default-dialog'
     		});
     	});	
+
+        $scope.$on('edit_bio_dialog', function(event, data){
+            var newScope = $scope.$new();
+            newScope.bio = $rootScope.currentUser.bio;
+            
+            var bioPopup = ngDialog.open({
+                templateUrl: 'views/bio_dialog.html',
+                scope: newScope,
+                className: 'default-dialog'
+            });
+
+            bioPopup.closePromise.then(function(data){
+                if(data.value){
+                    $rootScope.currentUser.bio = data.value;
+                }
+            });
+        }); 
 
     	$scope.$on('accept_invite_dialog', function(event, data){
     		var newScope = $scope.$new();

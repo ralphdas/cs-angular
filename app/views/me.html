@@ -6,6 +6,12 @@
 </div>
 <div class="row scroll-container">
 	<div class="col-xs-12">
+		
+		<h1 class="label-title upper">Bio</h1>
+		<button ng-click="showDialog('bio')" class="btn edit-btn"></button>
+		<p class="grey" ng-if="currentUser.bio === ''">Not set yet</p>
+		<p ng-if="currentUser.bio !== ''">{{currentUser.bio}}</p>
+
 		<h1 class="label-title upper">Stats</h1>
 		<div class="wrapper clearfix text-center">
 			<div dash-size="large" dash-format="currency" dash-value="{{currentUser.shooter.stats.revenue * 0.35}}" dash-label="FARMER

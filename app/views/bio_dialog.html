@@ -1,0 +1,18 @@
+<div class="col-xs-12">
+	<h1 class="label-title">Edit your bio (max:160 chars):</h1>
+	<div class="form-group">
+		<textarea ng-model="bio" rows="10" maxlength="160" placeholder="Your bio" class="form-control"></textarea>
+	</div>
+
+
+</div>
+
+<div class="btn-group stick-to-bottom">
+	<button ng-click="closeThisDialog(false)" class="btn col-xs-6">
+			Cancel
+	</button>
+
+	<button ng-click="closeThisDialog(bio)" class="btn col-xs-6 green">
+			Apply Changes
+	</button>
+</div>
