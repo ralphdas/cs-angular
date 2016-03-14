@@ -1,0 +1,18 @@
+<div class="col-xs-12">
+	<h1 class="label-title">Specify your Coffee Machine (max:60 chars):</h1>
+	<div class="form-group">
+		<textarea ng-model="machine" rows="4" maxlength="60" placeholder="Example: Francis Francis X7.1" class="form-control"></textarea>
+	</div>
+
+
+</div>
+
+<div class="btn-group stick-to-bottom">
+	<button ng-click="closeThisDialog(false)" class="btn col-xs-6">
+			Cancel
+	</button>
+
+	<button ng-click="closeThisDialog(machine)" class="btn col-xs-6 green">
+			Apply Changes
+	</button>
+</div>

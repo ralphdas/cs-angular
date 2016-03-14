@@ -30,8 +30,28 @@ angular.module('coffeeshotsApp')
             });
 
             bioPopup.closePromise.then(function(data){
-                if(data.value){
+                if(data.value  && data.value !== '$document'){
                     $rootScope.currentUser.bio = data.value;    
+                }
+            });
+        }); 
+
+
+        $scope.$on('show_machine_dialog', function(event, data){
+            var newScope = $scope.$new();
+            newScope.machine = $rootScope.currentUser.shooter.machine;
+            
+
+            var machinePopup = ngDialog.open({
+                templateUrl: 'views/machine_dialog.html',
+                scope: newScope,
+                className: 'default-dialog'
+            });
+
+            machinePopup.closePromise.then(function(data){
+               
+                if(data.value && data.value !== '$document'){
+                    $rootScope.currentUser.shooter.machine = data.value;    
                 }
             });
         }); 

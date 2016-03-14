@@ -23,6 +23,10 @@ angular.module('coffeeshotsApp')
     	if(_type == 'time'){
     		templateUrl = 'views/time_picker_dialog.html'; 
     	}
+      if(_type == 'machine'){
+        $scope.$emit('show_machine_dialog');
+        return;
+      }
     	if(_type == 'description'){
     		templateUrl = 'views/description_dialog.html'; 
     	}

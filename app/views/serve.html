@@ -41,6 +41,17 @@
 					<p ng-if="currentUser.shooter.description !== ''">{{currentUser.shooter.description}}
 					</p>
 
+					<h1 class="label-title upper">Machine</h1>
+					<button ng-click="showDialog('machine')" class="btn edit-btn"></button>
+					<p class="grey" ng-if="currentUser.shooter.machine === ''">Not set yet</p>
+					<p ng-if="currentUser.shooter.machine !== ''">{{currentUser.shooter.machine}}
+					</p>
+
+					<br>
+					<br>
+
+
+
 				</div>
 			</li>
 			<li ng-init="registerTab('guests')" ng-if="selectedTab == 'guests'" class="nav-content">
