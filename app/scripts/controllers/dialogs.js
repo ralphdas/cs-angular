@@ -8,8 +8,10 @@
  * Controller of the coffeeshotsApp
  */
 angular.module('coffeeshotsApp')
-  .controller('DialogsCtrl', function ($scope, ngDialog, $rootScope) {
-   		$scope.$on('open_details_dialog', function(event, data){
+  .controller('DialogsCtrl', function ($scope, ngDialog, $rootScope, Geocode) {
+   		
+        // Open the Shooter Details
+        $scope.$on('open_details_dialog', function(event, data){
     		var newScope = $scope.$new();
     		newScope.user = data;
     		var detailsPopup = ngDialog.open({
@@ -19,6 +21,7 @@ angular.module('coffeeshotsApp')
     		});
     	});	
 
+        // Edit the user biography
         $scope.$on('edit_bio_dialog', function(event, data){
             var newScope = $scope.$new();
             newScope.bio = $rootScope.currentUser.bio;
@@ -36,7 +39,7 @@ angular.module('coffeeshotsApp')
             });
         }); 
 
-
+        // Edit the shooter machine
         $scope.$on('show_machine_dialog', function(event, data){
             var newScope = $scope.$new();
             newScope.machine = $rootScope.currentUser.shooter.machine;
@@ -54,8 +57,46 @@ angular.module('coffeeshotsApp')
                     $rootScope.currentUser.shooter.machine = data.value;    
                 }
             });
-        }); 
+        });
+        // Edit the address details of a shooter
+        $scope.$on('show_address_dialog', function(event, data){
+            var newScope = $scope.$new();
+            newScope.address = $scope.currentUser.shooter.address;
+            console.log(newScope);
+            var addressPopup = ngDialog.open({
+                templateUrl: 'views/address_dialog.html',
+                scope: newScope,
+                className: 'default-dialog'
+            });
+            addressPopup.closePromise.then(function(data){
+              
+                if(data.value && data.value !== '$document'){
+                    
+                   
+                    var addressString = data.value.street+' '+data.value.postal_code+' '+data.value.city;
+                    
+                    Geocode.geocode(addressString, function(_geoResults){
+                        // safely assume the first is the right one
+                        var geo = {
+                            lat: _geoResults[0].geometry.location.lat(),
+                            lng: _geoResults[0].geometry.location.lng()
+                        }
+                        
+                        // Set this in the API
+                        console.log(data.value);
+                        $rootScope.currentUser.shooter.address.street = data.value.street;
+                        $rootScope.currentUser.shooter.address.city = data.value.city;
+                        $rootScope.currentUser.shooter.address.postal_code = data.value.postal_code;
+                        
+                        $rootScope.currentUser.shooter.address.geo = geo;
 
+                    });
+
+                }
+            });
+        });  
+
+        // accept a guest invitation
     	$scope.$on('accept_invite_dialog', function(event, data){
     		var newScope = $scope.$new();
     		newScope.user = data;
@@ -65,6 +106,8 @@ angular.module('coffeeshotsApp')
     			className: 'default-dialog'
     		});
     	});	
+
+        // drinks overview dialog 
     	$scope.$on('add_drinks_dialog', function(event, data){
     		var newScope = $scope.$new();
     		newScope.user = data;

@@ -1,18 +1,24 @@
 <div class="col-xs-12">
 	<h1 class="label-title">Edit your Address:</h1>
 	<div class="form-group">
-		<input type="text" placeholder="Address" class="form-control">
+		<input type="text" ng-model="address.street" placeholder="Streetname and House Number" class="form-control">
+	</div>
+	<div class="form-group">
+		<input type="text" ng-model="address.postal_code" placeholder="Postal Code" class="form-control">
+	</div>
+	<div class="form-group">
+		<input type="text" ng-model="address.city" placeholder="City" class="form-control">
 	</div>
 
 
 </div>
 
-<div class="btn-group stick-to-bottom">
+<div ng-click="closeThisDialog(false)" class="btn-group stick-to-bottom">
 	<button class="btn col-xs-6">
 			Cancel
 	</button>
 
-	<button class="btn col-xs-6 green">
+	<button ng-click="closeThisDialog(address)" class="btn col-xs-6 green">
 			Apply Changes
 	</button>
 </div>

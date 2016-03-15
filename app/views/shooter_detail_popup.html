@@ -14,7 +14,7 @@
 		<div dash-value="{{user.shooter.stats.revenue}}" dash-label="FARMER
 PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		<h1 class="label-title upper">About</h1>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At sed iste inventore, saepe eveniet rerum blanditiis soluta nostrum incidunt suscipit! Enim quas consequatur nihil nostrum, dignissimos earum nulla, necessitatibus ipsa!</p>
+		<p>{{user.bio}}</p>
 		<h1 class="label-title upper">Address</h1>
 		<p>{{user.shooter.address.street}}, {{user.shooter.address.postal_code}} {{user.shooter.address.city}}</p>
 		
@@ -23,17 +23,17 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		<p>Serving untill {{user.shooter.openUntill | hourAndMinutes}}, {{user.shooter.openUntill | timeRemaining}} remaining</p>
 
 		<h1 class="label-title upper">Machine</h1>
-		<p>Test Machine</p>
+		<p>{{user.shooter.machine}}</p>
 
 		<h1 class="label-title upper">Reviews</h1>
 		<div ng-repeat="review in user.shooter.reviews" class="row">
-			
+				<!-- This should be handleed by the review directive-->
 				<img ng-src="{{review.image}}" alt="" style="float: left; margin-left: 15px; margin-right: 15px;" class="user-avatar small">
 				<div class="rating" style="float:left; margin-left: -3px;" rating-value="{{review.stars}}"></div>
 				<div style="float:left" ><p class="small" >{{review.username}}, {{review.date}}</p></div>
-			
-			<div class="col-xs-12" style="padding-left: 80px; margin-top: -9px;" > <p>{{review.description}}</p> </div>
+				<div class="col-xs-12" style="padding-left: 80px; margin-top: -9px;" > <p>{{review.description}}</p> </div>
 		</div>
+			
 				
 				
 				
@@ -42,7 +42,7 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		
 		
 	</div>
-	<button class="btn btn-block green">
+	<button ng-click="closeDialog(user)" class="btn btn-block green">
 			request visit
 	</button>
 

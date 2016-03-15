@@ -18,7 +18,9 @@ angular.module('coffeeshotsApp')
     $scope.showDialog = function(_type){
     	var templateUrl;
     	if(_type == 'address'){
-    		templateUrl = 'views/address_dialog.html'; 
+    		//templateUrl = 'views/address_dialog.html'; 
+        $scope.$emit('show_address_dialog');
+        return;
     	}
     	if(_type == 'time'){
     		templateUrl = 'views/time_picker_dialog.html'; 
@@ -30,10 +32,7 @@ angular.module('coffeeshotsApp')
     	if(_type == 'description'){
     		templateUrl = 'views/description_dialog.html'; 
     	}
-    	var dialog = ngDialog.open({
-    		template: templateUrl,
-    		className: 'default-dialog'
-    	});
+    	
     }
 
      API.getCurrrentUser();

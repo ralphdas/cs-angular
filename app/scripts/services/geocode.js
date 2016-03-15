@@ -23,6 +23,18 @@ angular.module('coffeeshotsApp')
                 _cb(results);
             }
         });
+      },
+      getAddressComponent: function(address, component, type) {
+        var element = null;
+        angular.forEach(address.address_components, function (address_component) {
+          if (address_component.types[0] == component) {
+            element = (type == 'short') ? address_component.short_name : address_component.long_name;
+          }
+        });
+
+        return element;
       }
+
+
     };
   });
