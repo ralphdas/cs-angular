@@ -12,7 +12,7 @@ angular.module('coffeeshotsApp')
     // Service logic
     // ...
     var socket = socketFactory({ ioSocket: io.connect('localhost:3000') });
-
+    var currentUserId;
 
     socket.on('user.deauthenticated', function(){
       $rootScope.$broadcast('user.deauthenticated', []);
@@ -23,18 +23,27 @@ angular.module('coffeeshotsApp')
     });
 
     // User sucessfully logged in or registered
-    socket.on('user.authenticated', function(userObject){
-      
-      $rootScope.currentUser = userObject;
+    socket.on('user.authenticated', function(data){
+      $socket.$emit('user.get_details', {id: data.id});
+      currentUserId = data.id;
+     
       $rootScope.$broadcast('user.authenticated', [userObject]);
     });
+
+
     // response to user.get_shooters
     socket.on('user.shooters_around', function(shooterData){
       $rootScope.$broadcast('user.shooters_around', shooterData);
     });
-    socket.on('user.me_reply', function(_userDetails){
-      console.log(_userDetails);
-      $rootScope.$broadcast('user.me_reply', _userDetails);
+    socket.on('user.detail_reply', function(_userDetails){
+      if(currentUserId === _userDetails.id){
+         $rootScope.currentUser = _userDetails;
+         $rootScope.$broadcast('user.me_reply', _userDetails);
+      } else {
+        $rootScope.$broadcast('user.detail_reply', _userDetails);
+
+      }
+      
     });
 
     socket.on('user.alerts', function(_alerts){
@@ -68,8 +77,8 @@ angular.module('coffeeshotsApp')
       getShooters: function(geoData){
         socket.emit('user.get_shooters', geoData);
       },
-      getCurrrentUser: function(){
-        socket.emit('user.me');
+      getCurrrentUser: function(_userId){
+        socket.emit('user.get_details', {id: _userId});
       },
       getAlerts: function(){
         socket.emit('user.get_alerts');

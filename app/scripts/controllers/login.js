@@ -23,7 +23,6 @@ angular.module('coffeeshotsApp')
         
     hello.on('auth.login', function(auth) {
         hello('facebook').api('/me').then(function(_user) {
-            
             var end_user = {
                 firstname : _user.first_name,
                 lastname : _user.last_name,
@@ -31,12 +30,13 @@ angular.module('coffeeshotsApp')
                 email : _user.email
             }
             console.log(end_user);
-
-
-
+            
         });
-
     });
+
+
+
+
 
     this.registerUser = function(){
     	API.register($scope.registerInput);

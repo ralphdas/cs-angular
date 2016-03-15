@@ -8,7 +8,12 @@
  * Controller of the coffeeshotsApp
  */
 angular.module('coffeeshotsApp')
-  .controller('MeCtrl', function ($scope, API, $rootScope) {
+  .controller('MeCtrl', function ($scope, API, $rootScope, $location) {
+
+
+     $scope.logoutUser = function(){
+        $location.path('/login');
+     }
      
      $scope.showDialog = function(_type){
     	

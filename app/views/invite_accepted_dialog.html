@@ -1,0 +1,35 @@
+<div class="row dark-bean-pattern-bg">
+	<div class="col-xs-12 text-center">
+		<button ng-click="closeThisDialog()" class="close-button pull-right"></button>
+		<img ng-src="{{user.image}}" alt="" class="user-avatar">
+		<h1 class="large-title white">{{user.firstname}} {{user.lastname}}</h1>
+	</div>
+</div>
+
+	<div class="col-xs-12">
+		<h4 class="label-title">{{user.firstname}} accepted your Request</h4>
+		<p>Address:</p>
+		<p>{{user.shooter.address.street}}</p>
+		<p>{{user.shooter.address.city}}</p>
+		<p>{{user.shooter.address.postal_code}}</p>
+		
+		<a target="_blank" href="http://maps.google.com/?q={{user.shooter.address.street}} {{user.shooter.address.city}}">
+			<button class="btn btn-block">Navigate in Google Maps</button>
+		</a>
+		
+
+		
+		
+
+		
+
+	
+	</div>
+
+	<div class="btn-group stick-to-bottom">
+		<button ng-click="closeThisDialog()" class="btn col-xs-12">
+				OK 
+		</button>
+
+		
+	</div>
