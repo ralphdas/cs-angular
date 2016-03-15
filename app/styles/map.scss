@@ -18,21 +18,21 @@
     width: 50px;
     height: 50px;
     display: block;
-    background: rgba(0, 179, 255, 0.3);
+    background: rgba(255, 0, 0, 0.14);
     border-radius: 100%;
-    border: 1px solid #00B6FF;
+    border: 1px solid rgba(255, 0, 0, 0.44);
     position: relative;
     left: -25px;
     top: -25px;
     cursor: default;
 }
-.marker-current-pos div{
+.marker-current-pos div {
     position: relative;
     left: 21px;
     top: 21px;
     width: 6px;
     height: 6px;
-    background: #00B6FF;
+    background: #FF0000;
     border-radius: 100%;
 }
 

@@ -10,17 +10,34 @@
 angular.module('coffeeshotsApp')
   .controller('LoginCtrl', function ($scope, API, ngDialog, $rootScope, $location) {
 
-    this.activateFacebookPopup = function(){
-        // ngDialog should be shown
-        var facebookDialog = ngDialog.open({
-            template: 'views/fb_login_dialog.html',
-            className: 'fb-login-dialog'
+    this.facebookLogin = function(){
+        var options ={
+            'display':'page',
+            'scope':'email',
+        }
+        hello('facebook').login(options);
+    }
+
+        
+        
+        
+    hello.on('auth.login', function(auth) {
+        hello('facebook').api('/me').then(function(_user) {
+            
+            var end_user = {
+                firstname : _user.first_name,
+                lastname : _user.last_name,
+                image :  _user.thumbnail+'?type=large',
+                email : _user.email
+            }
+            console.log(end_user);
+
+
+
         });
 
-        facebookDialog.closePromise.then(function(data){
-            API.sendFacebookLogin('');
-        });   
-    }
+    });
+
     this.registerUser = function(){
     	API.register($scope.registerInput);
         $location.path('/welcome');

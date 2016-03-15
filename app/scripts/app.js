@@ -32,6 +32,10 @@ angular
      });
     API.getCurrrentUser();
 
+    hello.init({
+      facebook: '1686745721565298',
+    }, {redirect_uri: 'http://localhost:9000/'});
+     
 
     $rootScope.$on('$routeChangeSuccess', function(){
       if ($route.current.$$route.hideBar && $route.current.$$route.hideBar === true){
