@@ -23,14 +23,18 @@ angular.module('coffeeshotsApp')
         return;
     	}
     	if(_type == 'time'){
-    		templateUrl = 'views/time_picker_dialog.html'; 
+    		//TODO templateUrl = 'views/time_picker_dialog.html'; 
+        $scope.$emit('show_time_dialog');
+        return;
     	}
       if(_type == 'machine'){
         $scope.$emit('show_machine_dialog');
         return;
       }
     	if(_type == 'description'){
-    		templateUrl = 'views/description_dialog.html'; 
+    		//TODO templateUrl = 'views/description_dialog.html'; 
+        $scope.$emit('show_description_dialog');
+        return;
     	}
     	
     }
