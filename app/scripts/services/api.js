@@ -18,18 +18,18 @@ angular.module('coffeeshotsApp')
       $rootScope.$broadcast('user.deauthenticated', []);
     });
 
-    socket.on('user.resume', function(userObject){
-      $rootScope.$broadcast('user.resume', [userObject]);
+    socket.on('user.resume', function(_userObject){
+      $rootScope.$broadcast('user.resume', _userObject);
     });
 
     // User sucessfully logged in or registered
-    socket.on('user.authenticated', function(data){
-      $rootScope.$broadcast('user.authenticated', [userObject]);
+    socket.on('user.authenticated', function(_userId){
+      $rootScope.$broadcast('user.authenticated', _userId);
     });
       
     // response to user.get_shooters
-    socket.on('user.shooters_around', function(shooterData){
-      $rootScope.$broadcast('user.shooters_around', shooterData);
+    socket.on('user.shooters_around', function(_shooterData){
+      $rootScope.$broadcast('user.shooters_around', _shooterData);
     });
     
     // response to a user detail request
@@ -77,7 +77,7 @@ angular.module('coffeeshotsApp')
         socket.emit('user.fb_login', fbdata);
       },
       getUserDetails: function(_id){
-        $socket.emit('user.get_details', {id: _id});
+        socket.emit('user.get_details', {id: _id});
       },
       getShooters: function(geoData){
         socket.emit('user.get_shooters', geoData);

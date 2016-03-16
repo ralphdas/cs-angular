@@ -22,22 +22,19 @@ angular
     'ngCordova'
   ])
   
-  .run(function($rootScope, $route, API){
-    $rootScope.$on('user.me_reply', function(event, _userDetails){
-        $rootScope.$apply(function(){
-            $rootScope.currentUser = _userDetails;
-            
-        });
+  .run(function($rootScope, $route, API, $location){
+    
 
-     });
-    API.getCurrrentUser();
-
+    var hello = window.hello;
     hello.init({
       facebook: '1686745721565298',
     }, {redirect_uri: 'http://localhost:9000/'});
      
 
     $rootScope.$on('$routeChangeSuccess', function(){
+      if(!$rootScope.currentUser){
+        $location.path('/login');
+      }
       if ($route.current.$$route.hideBar && $route.current.$$route.hideBar === true){
         $rootScope.hideBar = true;
       } else {

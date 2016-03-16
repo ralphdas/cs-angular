@@ -9,11 +9,7 @@
  */
 angular.module('coffeeshotsApp')
   .controller('ServeCtrl', function ($scope, API, ngDialog) {
-    $scope.$on('user.me_reply', function(event, _userDetails){
-     	$scope.$apply(function(){
-     		$scope.currentUser = _userDetails;
-     	});
-     });
+    
     // TODO move to dialogs controller
     $scope.showDialog = function(_type){
     	var templateUrl;
@@ -39,5 +35,5 @@ angular.module('coffeeshotsApp')
     	
     }
 
-     API.getCurrrentUser();
+     
   });

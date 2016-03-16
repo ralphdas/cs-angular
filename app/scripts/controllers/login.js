@@ -20,7 +20,7 @@ angular.module('coffeeshotsApp')
 
         
         
-        
+
     hello.on('auth.login', function(auth) {
         hello('facebook').api('/me').then(function(_user) {
             var end_user = {
@@ -29,7 +29,9 @@ angular.module('coffeeshotsApp')
                 image :  _user.thumbnail+'?type=large',
                 email : _user.email
             }
+          
             API.sendFacebookLogin(end_user);
+                
             
         });
     });
@@ -44,17 +46,20 @@ angular.module('coffeeshotsApp')
 
 
     $rootScope.$on('user.authenticated', function(event, data){
+        
+        console.log(data);
         currentUserId = data.id;
-        API.getUserDetails(currentUserId);        
+        API.getUserDetails(currentUserId);
         
 
     });
 
     var deregisterListener = $rootScope.$on('user.detail_reply', function(event, data){
+       
         if(data.id === currentUserId){
-            $rootScope.currentUSer = data;
+            $rootScope.currentUser = data;
 
-            var ls = window.localstorage;
+            var ls = window.localStorage;
             if(ls && ls.welcome_shown){
                 $location.path('/drink');
             } else {
