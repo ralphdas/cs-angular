@@ -1,0 +1,92 @@
+
+'user.request_visit '
+parameters: 
+	id: string // value of the user himself
+	user_id_host: // user id of the barista  
+returns: nothing
+
+'user.change_bio'
+parameters:
+	id: string // userid of current user
+	bio: string // his new bio information
+returns: nothing 
+
+'shooter.start_serving'
+parameters:
+	id: string // userid of current user
+	street: string //  street + housenumber 
+	postal_code: string 
+	city: string
+	lat: float
+	lng: float
+	open_untill int // unix time closing time
+	description: string // 
+	machine: string // 
+returns: nothing
+
+'shooter.stop_serving'
+parameters:
+	id: string // userid of current user
+returns: nothing
+
+'shooter.accept_invite'
+parameters:
+	id: string // userid of current user
+	user_id_guest: string // userid of potential guest
+returns nothing -> should remove the alert 
+
+
+'shooter.deny_invite'
+parameters:
+	id: string // userid of current user
+	user_id_guest: string // userid of potential guest
+returns nothing -> should remove the alert 
+
+'user.invite_accepted'
+parameters:
+	id: string // userid of current user
+	user_id_host: string // userid of host
+returns nothing -> should remove the alert 
+
+
+'user.invite_denied'
+parameters:
+	id: string // userid of current user
+	user_id_host: string // userid of host
+returns nothing -> should remove the alert 
+
+'user.acceptPayment'
+parameters:
+	id: string // userid of current user
+	payment_id: // unique payement id from alert
+returns nothing
+
+'user.denyPayment'
+parameters:
+	id: string // userid of current user
+	payment_id: // unique payement id from alert
+returns nothing
+
+'shooter.requestPayment'
+parameters:
+	id: string // userid of current user
+	user_id_guest: // userid of visitor
+	amount: float // amount of money requested
+	cups: int // number of cups drunk
+returns nothing
+
+'shooter.clearGuest'
+parameters:
+	id: string // userid of current user
+	user_id_guest: // userid of visitor
+returns nothing // removes him from guest list
+
+'user.submit_rating'
+parameters:
+	id: string // userid of current user
+	stars: int
+	description: string
+	
+
+
+
