@@ -20,11 +20,11 @@
 	</div>
 
 	<div class="btn-group stick-to-bottom">
-		<button class="btn col-xs-6">
+		<button ng-click="closeThisDialog({'accepted':false, 'guest_id': user.id})" class="btn col-xs-6">
 				Deny 
 		</button>
 
-		<button class="btn col-xs-6 green">
+		<button ng-click="closeThisDialog({'accepted':true, 'guest_id': user.id})" class="btn col-xs-6 green">
 				Accept
 		</button>
 	</div>

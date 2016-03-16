@@ -97,7 +97,7 @@
                         }
                         
                         // Set this in the API
-                        console.log(data.value);
+                        
                         $rootScope.currentUser.shooter.address.street = data.value.street;
                         $rootScope.currentUser.shooter.address.city = data.value.city;
                         $rootScope.currentUser.shooter.address.postal_code = data.value.postal_code;
@@ -158,11 +158,40 @@
         $scope.$on('accept_invite_dialog', function(event, data){
         	var newScope = $scope.$new();
         	newScope.user = data;
-        	var detailsPopup = ngDialog.open({
+        	var acceptDialog = ngDialog.open({
         		templateUrl: 'views/accept_invite_dialog.html',
         		scope: newScope,
         		className: 'default-dialog'
         	});
+            acceptDialog.closePromise.then(function(data){
+                if(data.value === '$document'){
+                    // dismiss the popup not making desicion
+                    return;
+                }
+                if(data.value.accepted === false){
+                    API.denyInvite($rootScope.currentUser.id, data.value.guest_id);
+                    // need to remove user from the invite list
+                    $rootScope.currentUser.shooter.open_invites.forEach(function(candidate, index){
+                        if(candidate.id === data.value.guest_id){
+                            $rootScope.currentUser.shooter.open_invites.splice(index, 1);
+                        }
+                    });
+                }
+                 if(data.value.accepted === true){
+                    API.acceptInvite($rootScope.currentUser.id, data.value.guest_id);
+                    // need to move him to the guest list
+                    var _item;
+                    $rootScope.currentUser.shooter.open_invites.forEach(function(candidate, index){
+                        if(candidate.id === data.value.guest_id){
+                            _item = $rootScope.currentUser.shooter.open_invites.splice(index, 1)[0];
+                        }
+                    });
+                    _item.drinking_costs = 0;
+                    _item.cups_drunk = 0;
+                    _item.status = 0;
+                    $rootScope.currentUser.shooter.guests.unshift(_item);
+                }
+            });
         });	
 
         // drinks overview dialog 
