@@ -9,7 +9,7 @@
  */
 angular.module('coffeeshotsApp')
   .controller('LoginCtrl', function ($scope, API, ngDialog, $rootScope, $location) {
-
+    var currentUserId;
     this.facebookLogin = function(){
         var options ={
             'display':'page',
@@ -29,24 +29,44 @@ angular.module('coffeeshotsApp')
                 image :  _user.thumbnail+'?type=large',
                 email : _user.email
             }
-            console.log(end_user);
+            API.sendFacebookLogin(end_user);
             
         });
     });
 
-
-
-
-
     this.registerUser = function(){
     	API.register($scope.registerInput);
-        $location.path('/welcome');
+        
     }
     this.loginUser = function(){
         API.login($scope.loginInput);
     }
-    $rootScope.$on('user.authenticated', function(){
-        $location.path('/welcome');
+
+
+    $rootScope.$on('user.authenticated', function(event, data){
+        currentUserId = data.id;
+        API.getUserDetails(currentUserId);        
+        
+
     });
+
+    var deregisterListener = $rootScope.$on('user.detail_reply', function(event, data){
+        if(data.id === currentUserId){
+            $rootScope.currentUSer = data;
+
+            var ls = window.localstorage;
+            if(ls && ls.welcome_shown){
+                $location.path('/drink');
+            } else {
+                $location.path('/welcome');
+                ls.welcome_shown = true;
+            }
+            deregisterListener();
+        }
+    });
+       
+
+
+
         
   });
