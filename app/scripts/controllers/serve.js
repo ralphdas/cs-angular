@@ -8,8 +8,69 @@
  * Controller of the coffeeshotsApp
  */
 angular.module('coffeeshotsApp')
-  .controller('ServeCtrl', function ($scope, API, ngDialog) {
+  .controller('ServeCtrl', function ($scope, API, ngDialog, $rootScope, $timeout) {
+    var now = new Date().getTime();
     
+    $timeout(function(){
+        init();
+    }, 2000);
+    function init(){
+        if($rootScope.currentUser.shooter.openUntill > now){
+            $rootScope.currentUser.shooter.isShooting = true;
+        } else {
+            $rootScope.currentUser.shooter.isShooting = false;
+        }
+        
+    }
+    
+    function checkAddress(_addressObj){
+        var correct = true;
+        for(var value in _addressObj){
+            if(_addressObj[value] === ('' || undefined || null)){
+                correct = false;
+            }
+        }
+        return correct;
+    }
+
+    function checkTime(_time){
+         var correct = true;
+         var now = new Date().getTime() / 1000;
+         if(_time === 0 || _time < now){
+            correct = false;
+         }
+         return correct;
+    }
+    $scope.toggleServing = function(){
+        var endTime = $rootScope.currentUser.shooter.openUntill;
+        var address =  $rootScope.currentUser.shooter.address;
+        var formattingCorrect = Boolean(checkTime(endTime) && checkAddress(address));
+        var shooterObj = $rootScope.currentUser.shooter;
+        if(!formattingCorrect){
+            alert('Please set a correct Closing Time and Address.');
+            return;
+        }
+        if($rootScope.currentUser.shooter.isShooting){
+            $rootScope.currentUser.shooter.isShooting = false;
+            API.stopServing({
+                 'id':  $rootScope.currentUser.id,
+            });
+
+        } else {
+            $rootScope.currentUser.shooter.isShooting = true;
+            API.startServing({
+                'id':  $rootScope.currentUser.id,
+                'street': shooterObj.address.street,
+                'postal_code': shooterObj.address.postal_code,
+                'city': shooterObj.address.city, 
+                'lat': shooterObj.address.geo.lat,
+                'lng': shooterObj.address.geo.lng,
+                'open_untill': shooterObj.openUntill,
+                'description':  shooterObj.description,
+                'machine': shooterObj.machine
+            });
+        }
+    }
     // TODO move to dialogs controller
     $scope.showDialog = function(_type){
     	var templateUrl;

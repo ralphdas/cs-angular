@@ -22,7 +22,7 @@
 			<li ng-init="registerTab('details')" ng-if="selectedTab == 'details'" class="nav-content">
 				<div class="col-xs-12">
 					<h1 class="label-title upper">Address</h1>
-					<button ng-click="showDialog('address')" class="btn edit-btn"></button>
+					<button ng-click="showDialog('address')" ng-hide="currentUser.shooter.isShooting" class="btn edit-btn"></button>
 					<p class="grey" ng-if="currentUser.shooter.address.street === ''">Not set yet</p>
 
 					<p ng-if="currentUser.shooter.address.street !== ''">{{currentUser.shooter.address.street}} {{currentUser.shooter.address.postal_code}} {{currentUser.shooter.address.city}}</p>
@@ -30,19 +30,19 @@
 
 
 					<h1 class="label-title upper">End Time</h1>
-					<button ng-click="showDialog('time')" class="btn edit-btn"></button>
+					<button ng-click="showDialog('time')" ng-hide="currentUser.shooter.isShooting" class="btn edit-btn"></button>
 					
 					<p class="grey" ng-if="currentUser.shooter.openUntill === 0">Not set yet</p>
 					<p ng-if="currentUser.shooter.openUntill !== 0">Open untill {{(currentUser.shooter.openUntill * 1000) | date : 'HH:MM dd/MM/yyyy'}}</p>
 
 					<h1 class="label-title upper">Description</h1>
-					<button ng-click="showDialog('description')" class="btn edit-btn"></button>
+					<button ng-click="showDialog('description')" ng-hide="currentUser.shooter.isShooting" class="btn edit-btn"></button>
 					<p class="grey" ng-if="currentUser.shooter.description === ''">Not set yet</p>
 					<p ng-if="currentUser.shooter.description !== ''">{{currentUser.shooter.description}}
 					</p>
 
 					<h1 class="label-title upper">Machine</h1>
-					<button ng-click="showDialog('machine')" class="btn edit-btn"></button>
+					<button ng-click="showDialog('machine')" ng-hide="currentUser.shooter.isShooting" class="btn edit-btn"></button>
 					<p class="grey" ng-if="currentUser.shooter.machine === ''">Not set yet</p>
 					<p ng-if="currentUser.shooter.machine !== ''">{{currentUser.shooter.machine}}
 					</p>
@@ -74,6 +74,7 @@
 			</li>
 
 	</ul>
-	<button class="btn btn-block stick-to-bottombar green">Start Serving</button>
+	<button ng-show="!currentUser.shooter.isShooting" ng-click="toggleServing()" class="btn btn-block stick-to-bottombar green">Start Serving</button>
+	<button ng-show="currentUser.shooter.isShooting" ng-click="toggleServing()" class="btn btn-block stick-to-bottombar red">Stop Serving</button>
 	
 </div>

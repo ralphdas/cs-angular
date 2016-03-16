@@ -33,7 +33,7 @@ angular
 
     $rootScope.$on('$routeChangeSuccess', function(){
       if(!$rootScope.currentUser){
-        $location.path('/login');
+      $location.path('/login');
       }
       if ($route.current.$$route.hideBar && $route.current.$$route.hideBar === true){
         $rootScope.hideBar = true;

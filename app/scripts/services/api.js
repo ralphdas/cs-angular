@@ -72,8 +72,6 @@ angular.module('coffeeshotsApp')
       register: function(userdata){
         socket.emit('user.register', userdata); 
       },
-
-      
       getUserDetails: function(_id){
         socket.emit('user.get_details', {id: _id});
       },
@@ -116,6 +114,8 @@ angular.module('coffeeshotsApp')
       clearGuest: function(_userId, _paymentId){
          socket.emit('shooter.clear_guest', {'id': _userId, 'payment_id':_paymentId});
       }
+
+      
 
 
 

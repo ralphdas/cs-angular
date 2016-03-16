@@ -45,7 +45,8 @@
 
         	bioPopup.closePromise.then(function(data){
         		if(data.value  && data.value !== '$document'){
-        			$rootScope.currentUser.bio = data.value;    
+        			$rootScope.currentUser.bio = data.value;  
+                    API.changeBio($rootScope.currentUser.id, data.value);  
         		}
         	});
         }); 
