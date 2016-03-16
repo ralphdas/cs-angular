@@ -8,7 +8,7 @@
  * Controller of the coffeeshotsApp
  */
  angular.module('coffeeshotsApp')
- .controller('DialogsCtrl', function ($scope, ngDialog, $rootScope, Geocode) {
+ .controller('DialogsCtrl', function ($scope, ngDialog, $rootScope, Geocode, API) {
 
         // Open the Shooter Details
         $scope.$on('open_details_dialog', function(event, data){
@@ -19,6 +19,17 @@
         		scope: newScope,
         		className: 'default-dialog'
         	});
+            detailsPopup.closePromise.then(function(data){
+                console.log(data);
+                if(data.value  && data.value !== '$document'){
+                    console.log(data.value);
+                    API.requestVisit($rootScope.currentUser.id, data.value);
+                    var requestedShooter = $rootScope.shooters.find(function(shooter){
+                        return shooter.id === data.value;
+                    });
+                    requestedShooter.visitRequested = true;
+                }
+            });
         });	
 
         // Edit the user biography

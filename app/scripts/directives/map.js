@@ -11,7 +11,7 @@ angular.module('coffeeshotsApp')
     return {
      
       restrict: 'AC',
-      controller: function ($scope, API, IPtoGeo, Geocode, $timeout, $cordovaGeolocation) {
+      controller: function ($scope, $rootScope, API, IPtoGeo, Geocode, $timeout, $cordovaGeolocation) {
        	var accessTokenMapBox = 'pk.eyJ1IjoicmFscGhkYXMiLCJhIjoiT0ZUTXZqRSJ9.xNuIp977fBIZciLU967q5A';
 	    var mapBoxMapId = 'ralphdas.77660109';
 	    var shooters = [];
@@ -20,7 +20,7 @@ angular.module('coffeeshotsApp')
 	    $scope.$on('user.shooters_around', function(event, data){
 	    	shooters = data;
 	    	$scope.markers = createMarkers(data);
-	    	$scope.$parent.shooters = data;
+	    	$rootScope.shooters = data;
 	    });
 
 	    $scope.geoLocateMe = function(){

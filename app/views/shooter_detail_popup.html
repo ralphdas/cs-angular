@@ -41,8 +41,11 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		
 		
 	</div>
-	<button ng-click="closeDialog(user)" class="btn btn-block green">
+	<button ng-show="user.visitRequested !== true" ng-click="closeThisDialog(user.id)" class="btn btn-block green">
 			request visit
+	</button>
+	<button ng-show="user.visitRequested === true" ng-click="closeThisDialog(false)" class="btn btn-block">
+			Request Already Send
 	</button>
 
 
