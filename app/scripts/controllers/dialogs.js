@@ -51,6 +51,31 @@
         	});
         }); 
 
+
+        // Edit the user biography
+        $scope.$on('show_paypal_dialog', function(event, data){
+            var newScope = $scope.$new();
+            newScope.payment = data;
+
+            var paymentPopup = ngDialog.open({
+                templateUrl: 'views/paypal_dialog.html',
+                scope: newScope,
+                className: 'default-dialog'
+            });
+
+            paymentPopup.closePromise.then(function(data){
+                if(data.value === '$document'){
+                   return;
+                }
+                if(data.value === false){
+                    // denied
+                }
+                if(data.value === true){
+                    // acccepted
+                }
+            });
+        }); 
+
         // Edit the shooter machine
         $scope.$on('show_machine_dialog', function(event, data){
         	var newScope = $scope.$new();

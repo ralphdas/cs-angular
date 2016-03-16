@@ -19,6 +19,13 @@ angular.module('coffeeshotsApp')
       	$scope.$on('user.alerts', function(event, data){
       		$scope.alerts = data;
       	});
+
+        $scope.selectAlert = function(_alert){
+          console.log(_alert);
+
+          
+        }
+
       },
       link: function postLink(scope, element, attrs) {
        		scope.isVisible = false;
