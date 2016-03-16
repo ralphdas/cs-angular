@@ -11,7 +11,7 @@ angular.module('coffeeshotsApp')
   .factory('API', function (socketFactory, $cookies, $rootScope) {
     // Service logic
     // ...
-    var socket = socketFactory({ ioSocket: io.connect('localhost:3000') });
+    var socket = socketFactory({ ioSocket: window.io.connect('localhost:3000') });
    
 
     socket.on('user.deauthenticated', function(){
@@ -73,9 +73,7 @@ angular.module('coffeeshotsApp')
         socket.emit('user.register', userdata); 
       },
 
-      sendFacebookLogin: function(fbdata){
-        socket.emit('user.fb_login', fbdata);
-      },
+      
       getUserDetails: function(_id){
         socket.emit('user.get_details', {id: _id});
       },
@@ -87,7 +85,41 @@ angular.module('coffeeshotsApp')
       },
       getAlerts: function(){
         socket.emit('user.get_alerts');
+      },
+      requestVisit: function(_userId, _userIdHost){
+        socket.emit('user.request_visit', {'id': _userId, 'user_id_host':_userIdHost});
+      },
+      changeBio: function(_userId, _bio){
+         socket.emit('user.change_bio', {'id': _userId, 'bio':_bio});
+      },
+      startServing: function(_shooterData){
+         socket.emit('user.start_serving', _shooterData);
+      },
+      stopServing: function(_userId){
+         socket.emit('user.start_serving', {id: _userId});
+      },
+      acceptInvite: function(_userId, _guestUserId){
+         socket.emit('shooter.accept_invite', {'id': _userId, 'user_id_guest':_guestUserId});
+      },
+      denyInvite: function(_userId, _guestUserId){
+         socket.emit('shooter.deny_invite', {'id': _userId, 'user_id_guest':_guestUserId});
+      },
+      acceptPayment: function(_userId, _paymentId){
+         socket.emit('user.accept_payment', {'id': _userId, 'payment_id':_paymentId});
+      },
+      denyPayment: function(_userId, _paymentId){
+         socket.emit('user.denyPayment', {'id': _userId, 'payment_id':_paymentId});
+      },
+      requestPayment: function(_userId, _userIdGuest, _amount, _cups){
+         socket.emit('shooter.request_payment', {'id': _userId, 'user_id_guest':_userIdGuest, 'amount':_amount, 'cups':_cups});
+      },
+      clearGuest: function(_userId, _paymentId){
+         socket.emit('shooter.clear_guest', {'id': _userId, 'payment_id':_paymentId});
       }
+
+
+
+
 
 
     };

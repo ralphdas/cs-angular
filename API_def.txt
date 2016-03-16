@@ -42,32 +42,19 @@ parameters:
 	user_id_guest: string // userid of potential guest
 returns nothing -> should remove the alert 
 
-'user.invite_accepted'
-parameters:
-	id: string // userid of current user
-	user_id_host: string // userid of host
-returns nothing -> should remove the alert 
-
-
-'user.invite_denied'
-parameters:
-	id: string // userid of current user
-	user_id_host: string // userid of host
-returns nothing -> should remove the alert 
-
-'user.acceptPayment'
+'user.accept_payment'
 parameters:
 	id: string // userid of current user
 	payment_id: // unique payement id from alert
 returns nothing
 
-'user.denyPayment'
+'user.deny_payment'
 parameters:
 	id: string // userid of current user
 	payment_id: // unique payement id from alert
 returns nothing
 
-'shooter.requestPayment'
+'shooter.request_payment'
 parameters:
 	id: string // userid of current user
 	user_id_guest: // userid of visitor
@@ -75,7 +62,7 @@ parameters:
 	cups: int // number of cups drunk
 returns nothing
 
-'shooter.clearGuest'
+'shooter.clear_guest'
 parameters:
 	id: string // userid of current user
 	user_id_guest: // userid of visitor
@@ -86,7 +73,7 @@ parameters:
 	id: string // userid of current user
 	stars: int
 	description: string
-	
+
 
 
 

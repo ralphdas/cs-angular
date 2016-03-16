@@ -23,14 +23,17 @@ angular.module('coffeeshotsApp')
 
     hello.on('auth.login', function(auth) {
         hello('facebook').api('/me').then(function(_user) {
+           
             var end_user = {
                 firstname : _user.first_name,
                 lastname : _user.last_name,
                 image :  _user.thumbnail+'?type=large',
-                email : _user.email
+                email : _user.email,
+                fb_id: _user.id
+
             }
           
-            API.sendFacebookLogin(end_user);
+            API.register(end_user);
                 
             
         });
