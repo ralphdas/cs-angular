@@ -196,6 +196,24 @@
         	});
         });	
 
+        // Invite accepted
+        $scope.$on('invite_accepted_dialog', function(event, data){
+            var newScope = $scope.$new();
+            newScope.user = data;
+            var acceptDialog = ngDialog.open({
+                templateUrl: 'views/invite_accepted_dialog.html',
+                scope: newScope,
+                className: 'default-dialog'
+            });
+            acceptDialog.closePromise.then(function(data){
+                if(data.value === '$document'){
+                    // dismiss the popup not making desicion
+                    return;
+                }
+                
+            });
+        }); 
+
         // accept a guest invitation
         $scope.$on('accept_invite_dialog', function(event, data){
         	var newScope = $scope.$new();

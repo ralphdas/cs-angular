@@ -38,7 +38,7 @@ angular.module('coffeeshotsApp')
           }
           if(_alert.action === 'INVITE_ACCEPTED'){
              // TODO
-             $scope.$emit('show_invite_accepted_dialog', _alert.sender);
+             $scope.$emit('invite_accepted_dialog', _alert.sender);
           }
           if(_alert.action === 'RATING_REQUESTED'){
              // TODO

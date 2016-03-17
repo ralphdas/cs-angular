@@ -88,7 +88,14 @@ angular.module('coffeeshotsApp')
 	    		lat: data.lat,
 	    		lng: data.lon,
 	    		radius: 1000
-	    	})
+	    	});
+	    	setInterval(function(){
+	    		API.getShooters({
+		    		lat: data.lat,
+		    		lng: data.lon,
+		    		radius: 1000
+		    	});
+	    	}, 15000);
 	    });
 
 	   $scope.$on('leafletDirectiveMarker.click', function(event, data){
