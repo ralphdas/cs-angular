@@ -13,7 +13,7 @@
 		  </li>
 		  <li ng-init="registerTab('guests')" ng-class="{'active':selectedTab == 'guests'}">
 		  	<a ng-click="selectTab('guests')">
-		  		Guests <span class="label">{{currentUser.shooter.guests.length}}</span>
+		  		Guests <span ng-if="currentUser.shooter.isShooting" class="label">{{currentUser.shooter.guests.length}}</span>
 		  	</a>
 		  </li>
 
@@ -55,19 +55,29 @@
 				</div>
 			</li>
 			<li ng-init="registerTab('guests')" ng-if="selectedTab == 'guests'" class="nav-content">
-				<div class="col-xs-12">
-					<h1 class="label-title upper pull-left">Open Invites</h1>
-					<p class="small pull-right" style="margin-top: 15px;">Tap to accept</p>
+				<div ng-if="currentUser.shooter.isShooting" class="wrapper">
+					<div class="col-xs-12">
+						<h1 class="label-title upper pull-left">Open Invites</h1>
+						<p class="small pull-right" style="margin-top: 15px;">Tap to accept</p>
+					</div>
+					<div class="open-invites" invites="currentUser.shooter.open_invites"></div>
+
+
+					<div class="col-xs-12">
+						<h1 class="label-title upper pull-left">Guests</h1>
+						<p class="small pull-right" style="margin-top: 15px;">Tap to add drinks</p>
+					</div>
+					<div class="guests" guests-src="currentUser.shooter.guests"></div>
+					
+				
 				</div>
-				<div class="open-invites" invites="currentUser.shooter.open_invites"></div>
+				<div ng-if="!currentUser.shooter.isShooting" class="col-xs-12 text-center">
+				<br>
+				<br>
+				<p class="grey">When you start Serving you can manage your Bills, Guests and Invites here.</p>
+	
 
-
-				<div class="col-xs-12">
-					<h1 class="label-title upper pull-left">Guests</h1>
-					<p class="small pull-right" style="margin-top: 15px;">Tap to add drinks</p>
 				</div>
-				<div class="guests" guests-src="currentUser.shooter.guests"></div>
-
 
 				
 

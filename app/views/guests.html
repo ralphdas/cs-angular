@@ -1,10 +1,10 @@
 <div class="vertical-scroll-container">
 	<div ng-repeat="user in guests" ng-click="showDrinksDialog(user)" class="user-container text-center">
 		<img ng-src="{{user.image}}" alt="" class="user-avatar">
-		<div ng-show="{{user.status === 0}}" class="cost-label">
+		<div ng-if="user.status === 0" class="cost-label">
 			{{user.drinking_costs | currency: '€'}}
 		</div>
-		<div ng-show="{{user.status === 1}}" class="cost-label pending">
+		<div ng-if="user.status === 1" class="cost-label pending">
 			Payment Pending...
 		</div>
 		<p>{{user.firstname}} {{user.lastname}}</p>

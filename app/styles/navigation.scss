@@ -26,16 +26,47 @@
     text-align: center;
     
 }
+.navigation .icon-container.active .nav-icon {
+    &.serve{
+        background: url('../images/serveicon-selected.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        width: 100%;
+    }
+    &.drink{
+        background: url("../images/drinkicon-selected.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        width: 100%;
+    }
+}
 
 .navigation .nav-icon {
-	text-align: center;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    margin-top: 2px;
+
+    &.serve{
+        background: url('../images/serveicon.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        width: 100%;
+    }
+    &.drink{
+        background: url("../images/drinkicon.svg");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position-x: 50%;
+        width: 100%;
+    }
+
 	
 }
-.navigation .nav-icon svg{
-	display: inline-block;
-	height: 47px;
-	width: auto;
-}
+
 .navigation .icon-container.active svg * {
 	fill: #000;
 	

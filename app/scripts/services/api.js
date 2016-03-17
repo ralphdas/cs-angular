@@ -18,10 +18,7 @@ angular.module('coffeeshotsApp')
       $rootScope.$broadcast('user.deauthenticated', []);
     });
 
-    socket.on('user.resume', function(_userObject){
-      $rootScope.$broadcast('user.resume', _userObject);
-    });
-
+    
     // User sucessfully logged in or registered
     socket.on('user.authenticated', function(_userId){
       $rootScope.$broadcast('user.authenticated', _userId);

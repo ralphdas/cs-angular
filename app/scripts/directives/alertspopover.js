@@ -11,7 +11,7 @@ angular.module('coffeeshotsApp')
     return {
       templateUrl: 'views/alerts_popover.html',
       restrict: 'AC',
-      controller: function($scope, API){
+      controller: function($scope, API, $location){
       	API.getAlerts();
       	setInterval(function(){
       		API.getAlerts();
@@ -21,28 +21,31 @@ angular.module('coffeeshotsApp')
       	});
 
         $scope.selectAlert = function(_alert){
-          console.log(_alert);
-          if(_alert.type = 'PAYMENT_REQUESTED'){
+          
+          if(_alert.action === 'PAYMENT_REQUESTED'){
             // we need to show the payPal popup
+            
             $scope.$emit('show_paypal_dialog', $.extend(_alert.sender, _alert.details));
           }
-          if(_alert.type = 'PAYMENT_RECEIVED'){
-            
+          if(_alert.action === 'PAYMENT_RECEIVED'){
+            $location.path('/me');
           }
-          if(_alert.type = 'PAYMENT_RECEIVED'){
-            
+          if(_alert.action === 'PAYMENT_DENIED'){
+            $location.path('/me');
           }
-          if(_alert.type = 'INVITE_REQUESTED'){
-            
+          if(_alert.action === 'INVITE_REQUESTED'){
+             $scope.$emit('accept_invite_dialog', _alert.sender);
           }
-          if(_alert.type = 'INVITE_ACCEPTED'){
-            
+          if(_alert.action === 'INVITE_ACCEPTED'){
+             // TODO
+             $scope.$emit('show_invite_accepted_dialog', _alert.sender);
           }
-          if(_alert.type = 'RATING_REQUESTED'){
-            
+          if(_alert.action === 'RATING_REQUESTED'){
+             // TODO
+             $scope.$emit('show_rating_dialog', _alert.sender);
           }
-          if(_alert.type = 'RATING_RECEIVED'){
-            
+          if(_alert.action === 'RATING_RECEIVED'){
+            $location.path('/me');
           }
 
         }
