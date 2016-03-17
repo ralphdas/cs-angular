@@ -53,6 +53,9 @@
 	<button ng-click="requestPayment()" class="btn btn-block green">
 			Request Payment
 	</button>
+	<button ng-click="closeThisDialog({'action':'left', 'id': user.id})" class="btn btn-block blue">
+			User has left
+	</button>
 </div>
 
 <div ng-if="user.status === 1" class="btn-group stick-to-bottom">

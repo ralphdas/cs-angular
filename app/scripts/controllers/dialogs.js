@@ -275,15 +275,26 @@
 
 
             }
+
             newScope.resetUser = function(){
                 newScope.user.cups_drunk = 0;
                 newScope.user.drinking_costs = 0;
 
             }
-        	var detailsPopup = ngDialog.open({
+        	var drinksDialog = ngDialog.open({
         		templateUrl: 'views/add_drinks_dialog.html',
         		scope: newScope,
         		className: 'default-dialog add-drinks-dialog'
         	});
+            drinksDialog.closePromise.then(function(data){
+                console.log(data);
+                if(data.value.action=== 'left'){
+                    $rootScope.currentUser.shooter.guests.forEach(function(guest, index){
+                    if(guest.id === data.value.id){
+                         $rootScope.currentUser.shooter.guests.splice(index, 1);
+                    }
+                }); 
+                }
+            });
         });	
     });
