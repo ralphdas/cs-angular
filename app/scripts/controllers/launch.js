@@ -11,20 +11,18 @@ angular.module('coffeeshotsApp')
   .controller('LaunchCtrl', function (API, $rootScope, $location, $timeout) {
     
     
-    $timeout(function(){
-        API.rememberme();
-        
-    }, 500);
+   
 
-    $rootScope.$on('user.resume', function(data){
-    	console.log(data);
-    	// should go to welcome
-    	$location.path('/drink');
-    });
+   if(window.localStorage && window.localStorage.loginData && window.localStorage.loginData !== 'undefined'){
+        console.log(window.localStorage.loginData);
+   		var loginData = JSON.parse(window.localStorage.loginData);
+        API.login(loginData);
 
-    $rootScope.$on('user.deauthenticated', function(){
-    	// should go to welcome
-    	$location.path('/login');
-    });
+   } else {
+        $timeout(function(){
+            $location.path('/login');
+
+        }, 1000);
+   }
 
   });

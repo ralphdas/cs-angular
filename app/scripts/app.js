@@ -29,11 +29,33 @@ angular
     hello.init({
       facebook: '1686745721565298',
     }, {redirect_uri: 'http://localhost:9000/'});
+
+    hello.on('auth.login', function(auth) {
+        hello('facebook').api('/me').then(function(_user) {
+           
+            var end_user = {
+                firstname : _user.first_name,
+                lastname : _user.last_name,
+                image :  _user.thumbnail+'?type=large',
+                email : _user.email,
+                fb_id: _user.id
+
+            }
+          
+            API.register(end_user);
+                
+            
+        });
+    });
      
 
     $rootScope.$on('$routeChangeSuccess', function(){
       if(!$rootScope.currentUser){
-      $location.path('/login');
+          var currentPath = $location.path();
+          if(currentPath !== '/'){
+            $location.path('/login');
+          }
+
       }
       if ($route.current.$$route.hideBar && $route.current.$$route.hideBar === true){
         $rootScope.hideBar = true;
