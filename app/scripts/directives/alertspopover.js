@@ -24,7 +24,7 @@ angular.module('coffeeshotsApp')
           console.log(_alert);
           if(_alert.type = 'PAYMENT_REQUESTED'){
             // we need to show the payPal popup
-            $scope.$emit('show_paypal_dialog', _alert.details.concat(_alert.sender));
+            $scope.$emit('show_paypal_dialog', $.extend(_alert.sender, _alert.details));
           }
           if(_alert.type = 'PAYMENT_RECEIVED'){
             

@@ -108,8 +108,8 @@ angular.module('coffeeshotsApp')
       denyPayment: function(_userId, _paymentId){
          socket.emit('user.denyPayment', {'id': _userId, 'payment_id':_paymentId});
       },
-      requestPayment: function(_userId, _userIdGuest, _amount, _cups){
-         socket.emit('shooter.request_payment', {'id': _userId, 'user_id_guest':_userIdGuest, 'amount':_amount, 'cups':_cups});
+      requestPayment: function(_userId, _userIdGuest, _payment_id, _amount, _cups){
+         socket.emit('shooter.request_payment', {'id': _userId, 'user_id_guest':_userIdGuest, 'payment_id':_payment_id, 'amount':_amount, 'cups':_cups});
       },
       clearGuest: function(_userId, _paymentId){
          socket.emit('shooter.clear_guest', {'id': _userId, 'payment_id':_paymentId});

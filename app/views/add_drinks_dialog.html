@@ -6,12 +6,32 @@
 	</div>
 </div>
 
-<div class="text-center">
+<div ng-if="user.status == 0" class="text-center">
 	<div dash-value="{{user.drinking_costs}}" dash-label="Total amount due" dash-format="currency" class="dash-counter clearfix"></div>
 
 	<div dash-value="{{user.cups_drunk}}" dash-label="Cups" class="dash-counter clearfix"></div>
 
+	<div class="col-xs-12 new-order-wrapper">
+		<button ng-click="decreaseOrder()" class="btn btn-minus">
+			-
+		</button>
+		<span class="amount"><p>{{user.newOrderAmount | currency : '€'}}</p></span>
+		<button ng-click="increaseOrder()" class="btn btn-minus">
+			+
+		</button>
+
+	</div>
 	
+	
+</div>
+
+<div ng-if="user.status == 1" class="col-xs-12 text-center small">
+	<br>
+	<br>
+	<br>
+	<p>
+		Payment request submitted. When the user pays the outstanding amount of: {{user.drinking_costs}} Euro, you will receive an alert.  
+	</p>
 </div>
 
 
@@ -19,20 +39,25 @@
 
 
 
-<div class="btn-group stick-to-bottom">
+<div ng-if="user.status === 0" class="btn-group stick-to-bottom">
 	
-	<button class="btn col-xs-6">
+	<button ng-click="resetUser()" class="btn col-xs-6">
 			Reset All  
 	</button>
 
 
-	<button class="btn blue col-xs-6">
-			Add Order 
+	<button ng-click="addCup()" class="btn blue col-xs-6">
+			Add Cup 
 	</button>
 
-	<button class="btn btn-block green">
+	<button ng-click="requestPayment()" class="btn btn-block green">
 			Request Payment
 	</button>
 </div>
 
-		
+<div ng-if="user.status === 1" class="btn-group stick-to-bottom">
+	<button class="btn col-xs-12">
+			Close
+	</button>
+
+</div>

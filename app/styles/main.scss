@@ -22,13 +22,7 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 @import "user_container.scss";
 @import "reviews.scss";
 @import "alert_popover.scss";
+@import "paypal_dialog.scss";
+@import "add_drinks_dialog.scss";
 
 
-body, html{
-	height: 100%;
-	outline: none;
-	background: #FFF;
-}
-:focus {
-  outline: 0;
-}

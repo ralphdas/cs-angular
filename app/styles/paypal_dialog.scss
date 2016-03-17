@@ -1,0 +1,34 @@
+.paypal-dialog{
+	.paypal-logo{
+		width: 160px;
+		display: inline-block;
+		margin-top: 20px;
+	}
+	p.description{
+		width: 150px;
+	    margin-top: 30px;
+	    margin-left: 15px;
+	    font-weight: 500;
+	    color: #113984;
+	}
+	.ngdialog-content{
+		background: url('../images/paypalbackground.png');
+		background-size: cover;
+
+	}
+	.user-avatar{
+		margin-top: 25px;
+    	margin-left: 15px;
+	}
+	.dash-counter .round{
+		margin-top: 0px;
+		border-color: #009EE3;
+		.dash-value{
+			color: #113984;
+		}
+	}
+	.dash-label{
+		color: #1EA9E6;
+	}
+}
+
