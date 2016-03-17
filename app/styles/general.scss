@@ -26,6 +26,14 @@ body, html{
     position: fixed !important;
     bottom: 90px;
 }
+img.rating-star {
+    opacity: 0.2;
+    transition: all 0.2s ease-out;
+}
+img.rating-star.selected {
+    opacity: 1;
+}
+
 
 .dark-bean-pattern-bg{
     background: url('../images/coffeebeanbackgrounddark.png');

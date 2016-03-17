@@ -196,6 +196,48 @@
         	});
         });	
 
+        // Rate Shooter Dialog
+        $scope.$on('rate_shooter_dialog', function(event, data){
+            var newScope = $scope.$new();
+            newScope.user = data;
+            newScope.rating = 1;
+            newScope.stars = [
+                { selected:true },
+                { selected:false },
+                { selected:false },
+                { selected:false },
+                { selected:false },
+            ];
+
+            newScope.rate = function(_rate){
+                newScope.rating = _rate;
+                for (var i = 0; i < newScope.stars.length; i++) {
+                    if(i <= _rate-1){
+                        newScope.stars[i].selected = true;
+                    } else {
+                        newScope.stars[i].selected = false;
+
+                    }
+                };
+            }
+            var rateDialog = ngDialog.open({
+                templateUrl: 'views/rate_shooter_dialog.html',
+                scope: newScope,
+                className: 'default-dialog'
+            });
+            rateDialog.closePromise.then(function(data){
+                if(data.value === '$document'){
+                    // dismiss the popup not making desicion
+                    return;
+                }
+                if(data.value){
+                    API.submitRating(_rootScope.currentUser.id, data.value.rating, data.value.description);
+                }
+                
+            });
+        }); 
+
+
         // Invite accepted
         $scope.$on('invite_accepted_dialog', function(event, data){
             var newScope = $scope.$new();

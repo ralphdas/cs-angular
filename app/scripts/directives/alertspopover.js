@@ -42,7 +42,7 @@ angular.module('coffeeshotsApp')
           }
           if(_alert.action === 'RATING_REQUESTED'){
              // TODO
-             $scope.$emit('show_rating_dialog', _alert.sender);
+             $scope.$emit('rate_shooter_dialog', _alert.sender);
           }
           if(_alert.action === 'RATING_RECEIVED'){
             $location.path('/me');

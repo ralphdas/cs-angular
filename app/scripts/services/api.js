@@ -110,6 +110,9 @@ angular.module('coffeeshotsApp')
       },
       clearGuest: function(_userId, _paymentId){
          socket.emit('shooter.clear_guest', {'id': _userId, 'payment_id':_paymentId});
+      },
+      submitRating: function(_userId, _rating, _description){
+         socket.emit('user.submit_rating', {'id': _userId, 'stars':_rating, 'description':_description});
       }
 
       
