@@ -9,7 +9,7 @@
  */
 angular.module('coffeeshotsApp')
   .controller('ServeCtrl', function ($scope, API, ngDialog, $rootScope, $timeout) {
-    var now = new Date().getTime();
+    var now = new Date().getTime() / 1000;
     
     $timeout(function(){
         init();
