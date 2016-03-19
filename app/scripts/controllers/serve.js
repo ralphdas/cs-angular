@@ -13,8 +13,11 @@ angular.module('coffeeshotsApp')
     
     $timeout(function(){
         init();
-    }, 2000);
+    }, 3000);
     function init(){
+        if(!angular.isDefined($rootScope.currentUser.shooter.isShooting)){
+             $rootScope.currentUser.shooter.isShooting = false;
+        }
         if($rootScope.currentUser.shooter.openUntill > now){
             $rootScope.currentUser.shooter.isShooting = true;
         } else {
@@ -41,7 +44,14 @@ angular.module('coffeeshotsApp')
          }
          return correct;
     }
+    var lastToggle = 0;
     $scope.toggleServing = function(){
+        var now = new Date().getTime();
+
+        if((now - lastToggle) < 1000){
+            return;
+        }
+
         var endTime = $rootScope.currentUser.shooter.openUntill;
         var address =  $rootScope.currentUser.shooter.address;
         var formattingCorrect = Boolean(checkTime(endTime) && checkAddress(address));
@@ -70,6 +80,8 @@ angular.module('coffeeshotsApp')
                 'machine': shooterObj.machine
             });
         }
+        lastToggle = new Date().getTime();
+
     }
     // TODO move to dialogs controller
     $scope.showDialog = function(_type){

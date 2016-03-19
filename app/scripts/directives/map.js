@@ -84,19 +84,21 @@ angular.module('coffeeshotsApp')
 	    	}
 	    	$scope.$parent.latitude = data.lat;
 	    	$scope.$parent.longitude = data.lon;
-	    	API.getShooters({
-	    		lat: data.lat,
-	    		lng: data.lon,
+	    	
+	    });
+
+	    API.getShooters({
+    		lat: 0,
+    		lng: 0,
+    		radius: 1000
+    	});
+    	setInterval(function(){
+    		API.getShooters({
+	    		lat: 0,
+	    		lng: 0,
 	    		radius: 1000
 	    	});
-	    	setInterval(function(){
-	    		API.getShooters({
-		    		lat: data.lat,
-		    		lng: data.lon,
-		    		radius: 1000
-		    	});
-	    	}, 15000);
-	    });
+    	}, 15000);
 
 	   $scope.$on('leafletDirectiveMarker.click', function(event, data){
 	   		console.log(data.model.shooterId);
