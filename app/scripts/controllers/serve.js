@@ -62,9 +62,7 @@ angular.module('coffeeshotsApp')
         }
         if($rootScope.currentUser.shooter.isShooting){
             $rootScope.currentUser.shooter.isShooting = false;
-            API.stopServing({
-                 'id':  $rootScope.currentUser.id,
-            });
+            API.stopServing($rootScope.currentUser.id);
 
         } else {
             $rootScope.currentUser.shooter.isShooting = true;
