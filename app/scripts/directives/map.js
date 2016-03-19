@@ -60,13 +60,13 @@ angular.module('coffeeshotsApp')
 	    	typeDebounce = setTimeout(function(){
 	    		Geocode.geocode($scope.addressInput, function(_places){
 	    			
-	    			$scope.$apply(function(){
+	    			
 		    			$scope.centerPoint =  {
 				            lat: _places[0].geometry.location.lat(),
 				            lng: _places[0].geometry.location.lng(),
 				            zoom: 14
 				        }
-	    			});
+	    			
 
 
 	    				

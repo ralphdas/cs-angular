@@ -129,22 +129,33 @@
         		if(data.value && data.value !== '$document'){
 
 
-        			var addressString = data.value.street+' '+data.value.postal_code+' '+data.value.city;
+        			var addressString = data.value.street+' '+data.value.city;
 
         			Geocode.geocode(addressString, function(_geoResults){
                         // safely assume the first is the right one
-                        var geo = {
-                        	lat: _geoResults[0].geometry.location.lat(),
-                        	lng: _geoResults[0].geometry.location.lng()
+                        // 
+                        console.log(_geoResults);
+                        if(_geoResults){
+                            var geo = {
+                                lat: _geoResults[0].geometry.location.lat(),
+                                lng: _geoResults[0].geometry.location.lng()
+                            }
+                            
+                            // Set this in the API
+                            
+                            $rootScope.currentUser.shooter.address.street = data.value.street;
+                            $rootScope.currentUser.shooter.address.city = data.value.city;
+                            $rootScope.currentUser.shooter.address.postal_code = data.value.postal_code;
+                            
+                            $rootScope.currentUser.shooter.address.geo = geo;
+                        } else {
+                            window.alert('Oops! Address not found!');
+                            $rootScope.currentUser.shooter.address.street = '';
+                            $rootScope.currentUser.shooter.address.city = '';
+                            $rootScope.currentUser.shooter.address.postal_code = '';
+
                         }
                         
-                        // Set this in the API
-                        
-                        $rootScope.currentUser.shooter.address.street = data.value.street;
-                        $rootScope.currentUser.shooter.address.city = data.value.city;
-                        $rootScope.currentUser.shooter.address.postal_code = data.value.postal_code;
-                        
-                        $rootScope.currentUser.shooter.address.geo = geo;
 
                     });
 
