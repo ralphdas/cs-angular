@@ -135,6 +135,10 @@
                         // safely assume the first is the right one
                         // 
                         console.log(_geoResults);
+
+                        var _street = data.value.street;
+                        var _city = data.value.city;
+                        var _postal_code = data.value.postal_code;
                         if(_geoResults){
                             var geo = {
                                 lat: _geoResults[0].geometry.location.lat(),
@@ -142,12 +146,14 @@
                             }
                             
                             // Set this in the API
+                            $timeout(function(){
+                                $rootScope.currentUser.shooter.address.street = _street;
+                                $rootScope.currentUser.shooter.address.city = _city;
+                                $rootScope.currentUser.shooter.address.postal_code = _postal_code;
+                                $rootScope.currentUser.shooter.address.geo = geo;
+
+                            });
                             
-                            $rootScope.currentUser.shooter.address.street = data.value.street;
-                            $rootScope.currentUser.shooter.address.city = data.value.city;
-                            $rootScope.currentUser.shooter.address.postal_code = data.value.postal_code;
-                            
-                            $rootScope.currentUser.shooter.address.geo = geo;
                         } else {
                             window.alert('Oops! Address not found!');
                             $rootScope.currentUser.shooter.address.street = '';

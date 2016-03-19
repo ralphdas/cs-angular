@@ -30,7 +30,7 @@ angular.module('coffeeshotsApp')
         */
         var url = "http://nominatim.openstreetmap.org/search.php?q="+encodeURIComponent(_address)+"&format=json&json_callback=JSON_CALLBACK";
         var callback = _cb;
-            console.log(url);
+        
         $http.jsonp(url).success(function(_results){
             console.log(_results);
             if(_results.length === 0){
