@@ -47,12 +47,7 @@ angular
             
         });
     });
-    $rootScope.navDisabled = false;
-    $rootScope.$on('$locationChangeStart', function(event) {
-      if ($rootScope.navDisabled) {
-         event.preventDefault();
-      }
-    });
+    
      
 
     $rootScope.$on('$routeChangeSuccess', function(){
