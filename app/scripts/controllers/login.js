@@ -17,7 +17,10 @@ angular.module('coffeeshotsApp')
             'display':'page',
             'scope':'email',
         }
-        hello('facebook').login(options);
+        $rootScope.navDisabled = true;
+        hello('facebook').login(options).then(
+            $rootScope.navDisabled = false;
+        );
     }
 
         
