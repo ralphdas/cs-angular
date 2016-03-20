@@ -14,12 +14,12 @@ angular.module('coffeeshotsApp')
     var rememberMeData;
     this.facebookLogin = function(){
         var options ={
-            'display':'page',
+            
             'scope':'email',
         }
-        $rootScope.navDisabled = true;
+        
         hello('facebook').login(options).then(
-            $rootScope.navDisabled = false;
+            
         );
     }
 
