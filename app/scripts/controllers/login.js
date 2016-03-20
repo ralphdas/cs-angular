@@ -19,9 +19,9 @@
         }
         
         hello('facebook').login(options).then(function(_result){
-           alert(_result);
+          
             hello('facebook').api('/me').then(function(_user) {
-                alert(_user);
+                
                 var end_user = {
                     firstname : _user.first_name,
                     lastname : _user.last_name,
@@ -30,6 +30,8 @@
                     fb_id: _user.id
 
                 }
+                alert(JSON.stringify(_user));
+                alert(JSON.stringify(end_user));
 
                 API.register(end_user);
 
