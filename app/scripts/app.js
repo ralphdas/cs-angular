@@ -29,7 +29,7 @@ angular
     hello.init({
       facebook: '1686745721565298',
     }, {redirect_uri: 'http://localhost:9000/'});
-
+    /*
     hello.on('auth.login', function(auth) {
         hello('facebook').api('/me').then(function(_user) {
            
@@ -47,7 +47,8 @@ angular
             
         });
     });
-    
+    */
+
      
 
     $rootScope.$on('$routeChangeSuccess', function(){
