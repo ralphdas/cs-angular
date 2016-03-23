@@ -12,10 +12,18 @@ angular.module('coffeeshotsApp')
       templateUrl: 'views/alerts_popover.html',
       restrict: 'AC',
       controller: function($scope, API, $location){
-      	API.getAlerts($rootScope.currentUser.id);
-      	setInterval(function(){
-      		API.getAlerts($rootScope.currentUser.id);
-      	}, 10000);
+      	//API.getAlerts($rootScope.currentUser.id);
+      	
+        $rootScope.$watch('currentUser', function(newValue){
+          if(newValue){
+            API.getAlerts($rootScope.currentUser.id);
+            setInterval(function(){
+              API.getAlerts($rootScope.currentUser.id);
+            }, 10000);
+          }
+        });
+
+        
       	$scope.$on('user.alerts', function(event, data){
       		$scope.alerts = data;
       	});
