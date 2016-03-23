@@ -15,11 +15,15 @@ angular.module('coffeeshotsApp')
        	var accessTokenMapBox = 'pk.eyJ1IjoicmFscGhkYXMiLCJhIjoiT0ZUTXZqRSJ9.xNuIp977fBIZciLU967q5A';
 	    var mapBoxMapId = 'ralphdas.77660109';
 	    var shooters = [];
+	    var currentPosMarker;
 	    $scope.markers = [];
 	    
 	    $scope.$on('user.shooters_around', function(event, data){
 	    	shooters = data;
 	    	$scope.markers = createMarkers(data);
+	    	if(currentPosMarker){
+	    		$scope.markers.push(currentPosMarker);
+	    	}
 	    	$rootScope.shooters = data;
 	    });
 
@@ -42,7 +46,8 @@ angular.module('coffeeshotsApp')
 			        		$scope.markers.splice(i, 1);
 			        	}
 			        }
-			        $scope.markers.push(createCurrentPosMarker(lat, long));
+			        currentPosMarker = createCurrentPosMarker(lat, long);
+			        $scope.markers.push(currentPosMarker);
 
 			      
 
