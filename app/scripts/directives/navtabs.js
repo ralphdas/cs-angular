@@ -19,7 +19,7 @@ angular.module('coffeeshotsApp')
             scope.flipped = false;
           }
       },
-      controller: function($scope, $rootScope, $timeout){
+      controller: function($scope, $rootScope, $timeout, $location){
         var tabs = [];
         
         $scope.registerTab = function(_value, _default){
@@ -41,6 +41,8 @@ angular.module('coffeeshotsApp')
         $scope.selectTab = function(_value){
           
           $scope.selectedTab = _value;
+          
+          history.pushState({}, _value, $location.path()+'/'+_value);
           $rootScope.$broadcast('navTabs.select', [{selectedTab:_value}]);
         }
       } 

@@ -1,4 +1,8 @@
-<div class="row grey">
+<div ng-if="showSpinner" class="spinner">
+	&nbsp;
+</div>
+
+<div ng-if="!showSpinner" class="row grey">
 	<div class="col-xs-12">
 		<h1 class="label-title">Welcome to Coffee Shots</h1>
 		<p>Please login using one of the following methods.</p>
@@ -15,7 +19,7 @@
 </div>
 
 
-<div class="row" style="margin-top: 40px;">
+<div ng-if="!showSpinner" class="row" style="margin-top: 40px;">
 
 
 	<div class="col-xs-12">

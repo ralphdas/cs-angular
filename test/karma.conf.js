@@ -38,6 +38,8 @@ module.exports = function(config) {
       'bower_components/ngCordova/dist/ng-cordova.js',
       'bower_components/hello/dist/hello.all.min.js',
       'bower_components/simple-uuid/uuid.js',
+      'bower_components/underscore/underscore.js',
+      'bower_components/fastclick/lib/fastclick.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

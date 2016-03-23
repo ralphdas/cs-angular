@@ -42,6 +42,8 @@ parameters:
 	user_id_guest: string // userid of potential guest
 returns nothing -> should remove the alert 
 
+
+
 'user.accept_payment'
 parameters:
 	id: string // userid of current user

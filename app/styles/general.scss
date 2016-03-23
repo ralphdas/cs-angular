@@ -33,7 +33,18 @@ img.rating-star {
 img.rating-star.selected {
     opacity: 1;
 }
-
+.spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    background: url('../images/spinner.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: -16px;
+    margin-top: -16px;
+}
 
 .dark-bean-pattern-bg{
     background: url('../images/coffeebeanbackgrounddark.png');

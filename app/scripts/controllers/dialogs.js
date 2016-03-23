@@ -44,8 +44,9 @@
         	});
 
         	bioPopup.closePromise.then(function(data){
-        		if(data.value  && data.value !== '$document'){
-        			$rootScope.currentUser.bio = data.value;  
+        	   
+                if((data.value || data.value === '')  && data.value !== '$document'){
+                    $rootScope.currentUser.bio = data.value;  
                     API.changeBio($rootScope.currentUser.id, data.value);  
         		}
         	});
@@ -107,7 +108,7 @@
 
         	machinePopup.closePromise.then(function(data){
 
-        		if(data.value && data.value !== '$document'){
+        		if((data.value || data.value === '') && data.value !== '$document'){
         			$rootScope.currentUser.shooter.machine = data.value;    
         		}
         	});
@@ -205,7 +206,7 @@
         	});
         	descriptionPopup.closePromise.then(function(data){
         		
-        		if(data.value && data.value !== '$document'){
+        		if((data.value || data.value === '') && data.value !== '$document'){
         			$rootScope.currentUser.shooter.description = data.value;
 
 

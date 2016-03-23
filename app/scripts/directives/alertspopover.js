@@ -7,14 +7,14 @@
  * # alertsPopover
  */
 angular.module('coffeeshotsApp')
-  .directive('alertsPopover', function () {
+  .directive('alertsPopover', function ($rootScope) {
     return {
       templateUrl: 'views/alerts_popover.html',
       restrict: 'AC',
       controller: function($scope, API, $location){
-      	API.getAlerts();
+      	API.getAlerts($rootScope.currentUser.id);
       	setInterval(function(){
-      		API.getAlerts();
+      		API.getAlerts($rootScope.currentUser.id);
       	}, 10000);
       	$scope.$on('user.alerts', function(event, data){
       		$scope.alerts = data;

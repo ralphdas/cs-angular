@@ -77,6 +77,7 @@ angular.module('coffeeshotsApp')
 	    }
 
 	    IPtoGeo.retrieve(function(data){
+	    	
 	    	$scope.centerPoint = {
 	    		lat: data.lat,
 	            lng: data.lon,

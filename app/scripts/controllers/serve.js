@@ -11,9 +11,9 @@ angular.module('coffeeshotsApp')
   .controller('ServeCtrl', function ($scope, API, ngDialog, $rootScope, $timeout) {
     var now = new Date().getTime() / 1000;
     
-    $timeout(function(){
+    //$timeout(function(){
         init();
-    }, 3000);
+   // }, 3000);
     function init(){
         if(!angular.isDefined($rootScope.currentUser.shooter.isShooting)){
              $rootScope.currentUser.shooter.isShooting = false;

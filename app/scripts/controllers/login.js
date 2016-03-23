@@ -8,16 +8,25 @@
  * Controller of the coffeeshotsApp
  */
  angular.module('coffeeshotsApp')
- .controller('LoginCtrl', function ($scope, API, ngDialog, $rootScope, $location) {
+ .controller('LoginCtrl', function ($scope, API, ngDialog, $rootScope, $location, $timeout) {
     var currentUserId;
 
     var rememberMeData;
+
+    $scope.showSpinner = true;
+
+    $timeout(function(){
+        $scope.showSpinner = false;
+    }, 1500);
+    $scope.loginInput = {};
+    $scope.registerInput = {};
+
     this.facebookLogin = function(){
         var options ={
-
             'scope':'email',
         }
-        
+
+        $scope.showSpinner = true;
         hello('facebook').login(options).then(function(_result){
           
             hello('facebook').api('/me').then(function(_user) {
@@ -30,8 +39,7 @@
                     fb_id: _user.id
 
                 }
-                alert(JSON.stringify(_user));
-                alert(JSON.stringify(end_user));
+                
 
                 API.register(end_user);
 
@@ -49,45 +57,33 @@
 
 
     this.registerUser = function(){
-        rememberMeData = $scope.registerInput;
+        $scope.showSpinner = true;
+        if(window.localStorage){
+            
+            window.localStorage.loginData = JSON.stringify($scope.registerInput);
+        }
+         
         API.register($scope.registerInput);
 
     }
     this.loginUser = function(){
-        rememberMeData = $scope.loginInput;
+        $scope.showSpinner = true;
+        
+        if(window.localStorage){
+           
+            window.localStorage.loginData = JSON.stringify($scope.loginInput);
+        }
         API.login($scope.loginInput);
     }
 
 
-    $rootScope.$on('user.authenticated', function(event, data){
-        if(window.localStorage){
-            if(rememberMeData){
-                window.localStorage.loginData = JSON.stringify(rememberMeData);
-
-            }
-        }
-        console.log(data);
-        currentUserId = data.id;
-        API.getUserDetails(currentUserId);
+    
+        
+       
 
 
-    });
 
-    var deregisterListener = $rootScope.$on('user.detail_reply', function(event, data){
-
-        if(data.id === currentUserId){
-            $rootScope.currentUser = data;
-
-            var ls = window.localStorage;
-            if(ls && ls.welcome_shown){
-                $location.path('/drink');
-            } else {
-                $location.path('/welcome');
-                ls.welcome_shown = true;
-            }
-            deregisterListener();
-        }
-    });
+    
 
 
 

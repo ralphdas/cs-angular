@@ -78,8 +78,8 @@ angular.module('coffeeshotsApp')
       getCurrrentUser: function(_userId){
         socket.emit('user.get_details', {id: _userId});
       },
-      getAlerts: function(){
-        socket.emit('user.get_alerts');
+      getAlerts: function(_userId){
+        socket.emit('user.get_alerts', {'id':_userId});
       },
       requestVisit: function(_userId, _userIdHost){
         socket.emit('user.request_visit', {'id': _userId, 'user_id_host':_userIdHost});

@@ -20,6 +20,8 @@ angular.module('coffeeshotsApp')
         var url = 'http://ip-api.com/json?callback=JSON_CALLBACK';
         $http.jsonp(url).success(function(data){
           cb(data);
+        }).error(function(err){
+          console.log(err);
         });
       }
     };
