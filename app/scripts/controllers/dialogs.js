@@ -77,9 +77,36 @@
                 }
                 if(data.value === true){
                     // acccepted
-                    var description = _paypalDetails.cups+' cups of coffee with '+_paypalDetails.firstname+' '+_paypalDetails.lastname+' using the Coffee Shots App';
-                    var paymentDetails = new PayPalPaymentDetails(String(_paypalDetails.amount), "0.00", "0.00");
-                    var payment = new PayPalPayment(String(_paypalDetails.amount), "EURO", description, "", paymentDetails);
+                    
+                    
+
+                    var clientIDs = {
+                       "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
+                       "PayPalEnvironmentSandbox": "YOUR_SANDBOX_CLIENT_ID"
+                     };
+
+
+                     PayPalMobile.init(clientIDs, function(){
+
+                        var configObj = new PayPalConfiguration({
+                            merchantName: "Coffee Shots", 
+                            merchantPrivacyPolicyURL: "http://www.coffeeshots.nl/privacy-policy", 
+                            merchantUserAgreementURL: "http://www.coffeeshots.nl/algemene-voorwaarden"
+                        });
+
+                        PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", configObj, function(){
+                            var description = _paypalDetails.cups+' cups of coffee with '+_paypalDetails.firstname+' '+_paypalDetails.lastname+' using the Coffee Shots App';
+                            var paymentDetails = new PayPalPaymentDetails(String(_paypalDetails.amount), "0.00", "0.00");
+                            var payment = new PayPalPayment(String(_paypalDetails.amount), "EURO", description, "", paymentDetails);
+                        });
+
+                     });
+
+
+
+
+
+
                     window.PayPalMobile.renderSinglePaymentUI(payment, function success(_result){
                        console.log('payment succeeded!');
                        console.log(_result);
