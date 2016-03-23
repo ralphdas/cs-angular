@@ -42,7 +42,6 @@ angular.module('coffeeshotsApp')
           
           $scope.selectedTab = _value;
           
-          //history.pushState({}, _value, $location.path()+'/'+_value);
           $rootScope.$broadcast('navTabs.select', [{selectedTab:_value}]);
         }
       } 
