@@ -12,6 +12,7 @@ angular.module('coffeeshotsApp')
 
 
      $scope.logoutUser = function(){
+        delete window.localStorage.welcome_shown;
         $rootScope.block_login = false;
         if(window.localStorage){
             delete window.localStorage.loginData;

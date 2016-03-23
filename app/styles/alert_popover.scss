@@ -5,7 +5,7 @@
     background-size: cover;
     position: absolute;
     right: 20px;
-    top: 30px;
+    top: 17px;
     .alert-icon{
     	background: url('../images/alerticon.svg');
     	height: 23px;
@@ -20,7 +20,7 @@
 
 .alerts-container {
     position: absolute;
-    top: 50px;
+    top: 38px;
     left: -250px;
     width: 300px;
     box-shadow: -4px 7px 16px rgba(0, 0, 0, 0.16);
@@ -50,7 +50,7 @@
 }
 .alert-shield {
     position: fixed;
-    top: 90px;
+    top: 55px;
     left: 0;
     width: 100%;
     background: rgba(255, 255, 255, 0.6);

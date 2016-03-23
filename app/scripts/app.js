@@ -22,7 +22,7 @@
  	'ngCordova'
  	])
 
- .run(function($rootScope, $route, API, $location, ngDialog){
+ .run(function($rootScope, $route, API, $location, ngDialog, $timeout){
 
 
  	var hello = window.hello;
@@ -89,20 +89,22 @@
 	});
 
 	$rootScope.$on('user.detail_reply', function(event, data){
-		console.log('test 2');
-		console.log(currentUserId);
-		console.log(data.id);
+		
 		if(data.id === currentUserId){
 			$rootScope.currentUser = data;
 			console.log('Done');
 			var ls = window.localStorage;
 			$rootScope.block_login = true;
-			if(ls && ls.welcome_shown){
-				
+			console.log('FIRE');
+			if(window.localStorage.welcome_shown === "true"){
+
 				$location.path('/drink');
 			} else {
 				$location.path('/welcome');
-				ls.welcome_shown = true;
+				$timeout(function(){
+					window.localStorage.welcome_shown = "true";
+				}, 2000);
+				
 			}
 
 		}
