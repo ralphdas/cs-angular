@@ -18,6 +18,8 @@ angular.module('coffeeshotsApp')
           } else {
             scope.flipped = false;
           }
+
+          
       },
       controller: function($scope, $rootScope, $timeout, $location){
         var tabs = [];

@@ -327,7 +327,7 @@
                  if(data.value.accepted === true){
                     API.acceptInvite($rootScope.currentUser.id, data.value.guest_id);
                     // need to move him to the guest list
-                    var _item;
+                    var _item = {};
                     $rootScope.currentUser.shooter.open_invites.forEach(function(candidate, index){
                         if(candidate.id === data.value.guest_id){
                             _item = $rootScope.currentUser.shooter.open_invites.splice(index, 1)[0];
