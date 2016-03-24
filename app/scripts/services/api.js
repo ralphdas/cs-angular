@@ -94,9 +94,13 @@ angular.module('coffeeshotsApp')
          socket.emit('user.start_serving', {id: _userId});
       },
       acceptInvite: function(_userId, _guestUserId){
+         console.log('guest_user_id: '+_guestUserId);
+         console.log('user_id: '+_userId);
          socket.emit('shooter.accept_invite', {'id': _userId, 'user_id_guest':_guestUserId});
       },
       denyInvite: function(_userId, _guestUserId){
+         console.log('guest_user_id: '+_guestUserId);
+         console.log('user_id: '+_userId);
          socket.emit('shooter.deny_invite', {'id': _userId, 'user_id_guest':_guestUserId});
       },
       acceptPayment: function(_userId, _paymentId){
@@ -105,14 +109,16 @@ angular.module('coffeeshotsApp')
       denyPayment: function(_userId, _paymentId){
          socket.emit('user.denyPayment', {'id': _userId, 'payment_id':_paymentId});
       },
-      requestPayment: function(_userId, _userIdGuest, _payment_id, _amount, _cups){
-         socket.emit('shooter.request_payment', {'id': _userId, 'user_id_guest':_userIdGuest, 'payment_id':_payment_id, 'amount':_amount, 'cups':_cups});
+      requestPayment: function(_userId, _guestUserId, _payment_id, _amount, _cups){
+         console.log('guest_user_id: '+_guestUserId);
+         console.log('user_id: '+_userId);
+         socket.emit('shooter.request_payment', {'id': _userId, 'user_id_guest':_guestUserId, 'payment_id':_payment_id, 'amount':_amount, 'cups':_cups});
       },
-      clearGuest: function(_userId, _paymentId){
-         socket.emit('shooter.clear_guest', {'id': _userId, 'payment_id':_paymentId});
+      clearGuest: function(_userId, _guestUserId){
+         socket.emit('shooter.clear_guest', {'id': _userId, 'user_id_guest':_guestUserId});
       },
-      submitRating: function(_userId, _rating, _description){
-         socket.emit('user.submit_rating', {'id': _userId, 'stars':_rating, 'description':_description});
+      submitRating: function(_userId, _userIdHost, _rating, _description){
+         socket.emit('user.submit_rating', {'id': _userId, 'user_id_host': _userIdHost, 'stars':_rating, 'description':_description});
       }
 
       

@@ -276,7 +276,7 @@
                     return;
                 }
                 if(data.value){
-                    API.submitRating(_rootScope.currentUser.id, data.value.rating, data.value.description);
+                    API.submitRating($rootScope.currentUser.id, data.value.host_id, data.value.rating, data.value.description);
                 }
                 
             });
@@ -394,6 +394,8 @@
             drinksDialog.closePromise.then(function(data){
                 console.log(data);
                 if(data.value.action=== 'left'){
+                    API.clearGuest($rootScope.currentUser.id, data.value.id);
+
                     $rootScope.currentUser.shooter.guests.forEach(function(guest, index){
                     if(guest.id === data.value.id){
                          $rootScope.currentUser.shooter.guests.splice(index, 1);
