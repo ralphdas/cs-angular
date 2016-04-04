@@ -7,7 +7,7 @@
 	  </div>
 	  <div class="media-body">
 	    <h4 class="label-title">{{shooter.firstname}} {{shooter.lastname}}</h4>
-	    <span class="right-float"><p class="small">{{shooter.shooter.openUntill | timeRemaining}}</p></span>
+	    <span class="right-float"><p class="small">{{shooter.shooter.open_until | timeRemaining}}</p></span>
 	    <p class="no-wrap">{{shooter.shooter.address.street}}, {{shooter.shooter.address.postal_code}} {{shooter.shooter.address.city}}</p>
 	    <div class="rating" rating-value="{{shooter.shooter.stats.stars}}"></div>
 	  </div>

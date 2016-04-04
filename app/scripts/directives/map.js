@@ -18,14 +18,14 @@
  			var currentPosMarker;
  			$scope.markers = [];
  			
- 			$scope.$on('user.shooters_around', function(event, data){
+ 			function onShooters(data){
  				shooters = data;
  				$scope.markers = createMarkers(data);
  				if(currentPosMarker){
  					$scope.markers.push(currentPosMarker);
  				}
  				$rootScope.shooters = data;
- 			});
+ 			}
 
  			$scope.geoLocateMe = function(){
  				var posOptions = {timeout: 10000, enableHighAccuracy: false};
@@ -90,21 +90,23 @@
  				}
  				$scope.$parent.latitude = data.lat;
  				$scope.$parent.longitude = data.lon;
+
+ 				API.getShooters({
+	 				lat: data.lat,
+	 				lng: data.lon,
+	 				radius: 1000
+	 			}, onShooters);
+	 			setInterval(function(){
+	 				API.getShooters({
+	 					lat: $scope.centerPoint.lat,
+	 					lng: $scope.centerPoint.lng,
+	 					radius: 1000
+	 				}, onShooters);
+	 			}, 15000);
  				
  			});
 
- 			API.getShooters({
- 				lat: 0,
- 				lng: 0,
- 				radius: 1000
- 			});
- 			setInterval(function(){
- 				API.getShooters({
- 					lat: 0,
- 					lng: 0,
- 					radius: 1000
- 				});
- 			}, 15000);
+ 			
 
  			$scope.$on('leafletDirectiveMarker.click', function(event, data){
  				console.log(data.model.shooterId);

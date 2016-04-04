@@ -23,9 +23,9 @@
                 console.log(data);
                 if(data.value  && data.value !== '$document'){
                     console.log(data.value);
-                    API.requestVisit($rootScope.currentUser.id, data.value);
+                    API.requestVisit($rootScope.currentUser._id, data.value);
                     var requestedShooter = $rootScope.shooters.find(function(shooter){
-                        return shooter.id === data.value;
+                        return shooter._id === data.value;
                     });
                     requestedShooter.visitRequested = true;
                 }
@@ -47,7 +47,7 @@
         	   
                 if((data.value || data.value === '')  && data.value !== '$document'){
                     $rootScope.currentUser.bio = data.value;  
-                    API.changeBio($rootScope.currentUser.id, data.value);  
+                    API.changeBio($rootScope.currentUser._id, data.value);  
         		}
         	});
         }); 
@@ -56,6 +56,7 @@
         // Edit the user biography
         $scope.$on('show_paypal_dialog', function(event, data){
             var newScope = $scope.$new();
+            console.log(data);
             newScope.details = data;
 
             var _paypalDetails = data;
@@ -71,9 +72,10 @@
                 if(data.value === '$document'){
                    return;
                 }
+
                 if(data.value === false){
                     // denied
-                    API.denyPayment($rootScope.currentUser.id, _paypalDetails.payment_id);
+                    API.denyPayment($rootScope.currentUser._id, _paypalDetails.sender_id, _paypalDetails.amount,  _paypalDetails.payment_id);
                 }
                 if(data.value === true){
                     // acccepted
@@ -111,7 +113,7 @@
                        console.log('payment succeeded!');
                        console.log(_result);
 
-                       API.acceptPayment($rootScope.currentUser.id, _paypalDetails.payment_id);
+                       API.acceptPayment($rootScope.currentUser._id, _paypalDetails.sender_id, _paypalDetails.amount, _paypalDetails.cups, _paypalDetails.payment_id);
                     }, function failed(_result){
                         console.log('payment failed :-(  ');
                         console.log(_result);
@@ -179,6 +181,7 @@
                                 $rootScope.currentUser.shooter.address.city = _city;
                                 $rootScope.currentUser.shooter.address.postal_code = _postal_code;
                                 $rootScope.currentUser.shooter.address.geo = geo;
+                                $rootScope.currentUser.shooter.address.geo_point = [geo.lat, geo.lng];
 
                             });
                             
@@ -216,7 +219,7 @@
         			desired_time = new Date(desired_time).setMinutes(minutes);
 
 
-        			$rootScope.currentUser.shooter.openUntill = desired_time / 1000;
+        			$rootScope.currentUser.shooter.open_until = desired_time / 1000;
 
         		}
         	});
@@ -276,7 +279,7 @@
                     return;
                 }
                 if(data.value){
-                    API.submitRating($rootScope.currentUser.id, data.value.host_id, data.value.rating, data.value.description);
+                    API.submitRating($rootScope.currentUser._id, data.value.host_id, data.value.rating, data.value.description);
                 }
                 
             });
@@ -316,28 +319,18 @@
                     return;
                 }
                 if(data.value.accepted === false){
-                    API.denyInvite($rootScope.currentUser.id, data.value.guest_id);
-                    // need to remove user from the invite list
-                    $rootScope.currentUser.shooter.open_invites.forEach(function(candidate, index){
-                        if(candidate.id === data.value.guest_id){
-                            $rootScope.currentUser.shooter.open_invites.splice(index, 1);
-                        }
-                    });
+                    API.denyInvite($rootScope.currentUser._id, data.value.guest_id);
+                    
                 }
                  if(data.value.accepted === true){
-                    API.acceptInvite($rootScope.currentUser.id, data.value.guest_id);
-                    // need to move him to the guest list
-                    var _item = {};
-                    $rootScope.currentUser.shooter.open_invites.forEach(function(candidate, index){
-                        if(candidate.id === data.value.guest_id){
-                            _item = $rootScope.currentUser.shooter.open_invites.splice(index, 1)[0];
-                        }
-                    });
-                    _item.drinking_costs = 0;
-                    _item.cups_drunk = 0;
-                    _item.status = 0;
-                    $rootScope.currentUser.shooter.guests.unshift(_item);
+                    console.log($rootScope.currentUser._id);
+                    console.log(data);
+                    API.acceptInvite($rootScope.currentUser._id, data.value.guest_id);
+                
                 }
+                $timeout(function(){
+                    $scope.$emit('user.get_updates'); 
+                }, 500);
             });
         });	
 
@@ -356,34 +349,32 @@
                 }
             }
             newScope.addCup = function(){
-                newScope.user.cups_drunk += 1;
                 
-                newScope.user.drinking_costs += newScope.user.newOrderAmount;
-                newScope.user.newOrderAmount = 0;
+                
+                API.changeOrder($rootScope.currentUser._id, newScope.user.user_id, (newScope.user.drinking_costs + newScope.user.newOrderAmount), (newScope.user.cups_drunk +1), function(_guest){
+                    newScope.user = _guest;
+                    newScope.user.newOrderAmount = 0;
+                });
             }
             newScope.requestPayment = function(){
-                var payment_id = window.UUID.generate();
                 
-                API.requestPayment($rootScope.currentUser.id, newScope.user.id, payment_id,  newScope.user.drinking_costs, newScope.user.cups_drunk);
-                $timeout(function(){
-                    newScope.user.status = 1;
-                    
+                
+                API.requestPayment($rootScope.currentUser._id, newScope.user.user_id, newScope.user.payment_id,  newScope.user.drinking_costs, newScope.user.cups_drunk, function(_guest){
+                     newScope.user = _guest;
                 });
                 
-                $rootScope.currentUser.shooter.guests.forEach(function(guest){
-                    if(guest.id === newScope.user.id){
-                        guest.status = newScope.user.status;
-                        guest.payment_id = payment_id;
-                    }
-                }); 
+                
+                
                 
 
 
             }
 
             newScope.resetUser = function(){
-                newScope.user.cups_drunk = 0;
-                newScope.user.drinking_costs = 0;
+                 API.changeOrder($rootScope.currentUser._id, newScope.user.user_id, 0, 0, function(_guest){
+                    newScope.user = _guest;
+                    newScope.user.newOrderAmount = 0;
+                });
 
             }
         	var drinksDialog = ngDialog.open({
@@ -394,7 +385,7 @@
             drinksDialog.closePromise.then(function(data){
                 console.log(data);
                 if(data.value.action=== 'left'){
-                    API.clearGuest($rootScope.currentUser.id, data.value.id);
+                    API.clearGuest($rootScope.currentUser._id, data.value.id);
 
                     $rootScope.currentUser.shooter.guests.forEach(function(guest, index){
                     if(guest.id === data.value.id){

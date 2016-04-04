@@ -24,6 +24,9 @@
   overflow: scroll;
   -webkit-overflow: touch;
   height: 220px;
+  &.extended{
+    height: 270px;
+  }
 }
 .default-dialog .ngdialog-close{
   display: none;

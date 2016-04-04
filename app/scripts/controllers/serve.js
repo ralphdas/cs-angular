@@ -11,20 +11,8 @@ angular.module('coffeeshotsApp')
   .controller('ServeCtrl', function ($scope, API, ngDialog, $rootScope, $timeout) {
     var now = new Date().getTime() / 1000;
     
-    //$timeout(function(){
-        init();
-   // }, 3000);
-    function init(){
-        if(!angular.isDefined($rootScope.currentUser.shooter.isShooting)){
-             $rootScope.currentUser.shooter.isShooting = false;
-        }
-        if($rootScope.currentUser.shooter.openUntill > now){
-            $rootScope.currentUser.shooter.isShooting = true;
-        } else {
-            $rootScope.currentUser.shooter.isShooting = false;
-        }
-        
-    }
+   
+
     
     function checkAddress(_addressObj){
         var correct = true;
@@ -34,6 +22,22 @@ angular.module('coffeeshotsApp')
             }
         }
         return correct;
+    }
+
+    setInterval(function(){
+        checkServing();
+    }, 1000);
+
+    function checkServing(){
+        if(typeof($rootScope.currentUser) === 'undefined'){
+            return;
+        }
+        var endTime = $rootScope.currentUser.shooter.open_until;
+        var now = Math.floor(new Date().getTime()/ 1000);
+       
+        if($rootScope.currentUser.shooter.is_serving && now > endTime){
+            $scope.toggleServing();
+        }
     }
 
     function checkTime(_time){
@@ -52,30 +56,37 @@ angular.module('coffeeshotsApp')
             return;
         }
 
-        var endTime = $rootScope.currentUser.shooter.openUntill;
+        var endTime = $rootScope.currentUser.shooter.open_until;
         var address =  $rootScope.currentUser.shooter.address;
         var formattingCorrect = Boolean(checkTime(endTime) && checkAddress(address));
         var shooterObj = $rootScope.currentUser.shooter;
-        if(!formattingCorrect){
+        var is_serving = $rootScope.currentUser.shooter.is_serving;
+        if(!formattingCorrect && !is_serving){
             alert('Please set a correct Closing Time and Address.');
             return;
         }
-        if($rootScope.currentUser.shooter.isShooting){
-            $rootScope.currentUser.shooter.isShooting = false;
-            API.stopServing($rootScope.currentUser.id);
+        if($rootScope.currentUser.shooter.is_serving){
+            $rootScope.currentUser.shooter.is_serving = false;
+            $rootScope.currentUser.open_until = 0;
+            API.stopServing({
+                '_id':  $rootScope.currentUser._id,
+                'shooter': $rootScope.currentUser.shooter
+            }, function(err, result){
+               
+                console.log(result);
+                $rootScope.currentUser = result;
+               
+            });
 
         } else {
-            $rootScope.currentUser.shooter.isShooting = true;
+            $rootScope.currentUser.shooter.is_serving = true;
             API.startServing({
-                'id':  $rootScope.currentUser.id,
-                'street': shooterObj.address.street,
-                'postal_code': shooterObj.address.postal_code,
-                'city': shooterObj.address.city, 
-                'lat': shooterObj.address.geo.lat,
-                'lng': shooterObj.address.geo.lng,
-                'open_untill': shooterObj.openUntill,
-                'description':  shooterObj.description,
-                'machine': shooterObj.machine
+                '_id':  $rootScope.currentUser._id,
+                'shooter': $rootScope.currentUser.shooter
+            }, function(err, result){
+                console.log(result);
+                $rootScope.currentUser = result;
+               
             });
         }
         lastToggle = new Date().getTime();

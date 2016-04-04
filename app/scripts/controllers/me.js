@@ -14,10 +14,12 @@ angular.module('coffeeshotsApp')
      $scope.logoutUser = function(){
         delete window.localStorage.welcome_shown;
         $rootScope.block_login = false;
+       delete $rootScope.currentUser;
         if(window.localStorage){
             delete window.localStorage.loginData;
+            delete window.localStorage.hello;
         }
-        $location.path('/');
+        window.location.reload(true);
      }
      
      $scope.showDialog = function(_type){

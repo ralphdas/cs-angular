@@ -75,7 +75,9 @@
 			}
 
 
-			API.register(end_user);
+			API.register(end_user, function(_currentUser){
+                 $rootScope.$emit('user.authenticated', _currentUser);
+            });
 
 
 
@@ -83,32 +85,27 @@
 		});
 	});
 	$rootScope.$on('user.authenticated', function(event, data){
-		currentUserId = data.id;
-		API.getUserDetails(currentUserId);
-
-	});
-
-	$rootScope.$on('user.detail_reply', function(event, data){
 		
-		if(data.id === currentUserId){
-			$rootScope.currentUser = data;
-			console.log('Done');
-			var ls = window.localStorage;
-			$rootScope.block_login = true;
-			console.log('FIRE');
-			if(window.localStorage.welcome_shown === "true"){
+		$rootScope.currentUser = data;
+		console.log('Done');
+		var ls = window.localStorage;
+		$rootScope.block_login = true;
+		console.log('FIRE');
+		if(window.localStorage.welcome_shown === "true"){
 
-				$location.path('/drink');
-			} else {
-				$location.path('/welcome');
-				$timeout(function(){
-					window.localStorage.welcome_shown = "true";
-				}, 2000);
-				
-			}
-
+			$location.path('/drink');
+		} else {
+			$location.path('/welcome');
+			$timeout(function(){
+				window.localStorage.welcome_shown = "true";
+			}, 2000);
+			
 		}
+
+
 	});
+
+	
 
 	
 	

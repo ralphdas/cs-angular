@@ -8,7 +8,7 @@
 	</div>
 </div>
 
-	<div class="col-xs-12 scroll-box">
+	<div class="col-xs-12 scroll-box" ng-class="{'extended': currentUser._id === user._id}">
 		<div dash-value="{{user.shooter.stats.guests}}" dash-label="GUESTS (±)" class="dash-counter clearfix"></div>
 		<div dash-value="{{user.shooter.stats.cups_served}}" dash-label="CUPS SERVED" class="dash-counter clearfix"></div>
 		<div dash-value="{{user.shooter.stats.revenue * 0.02 }}" dash-label="FARMER
@@ -19,7 +19,7 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		
 
 		<h1 class="label-title upper">Time</h1>
-		<p>Serving untill {{user.shooter.openUntill | hourAndMinutes}}, {{user.shooter.openUntill | timeRemaining}} remaining</p>
+		<p>Serving untill {{user.shooter.open_until | hourAndMinutes}}, {{user.shooter.open_until | timeRemaining}} remaining</p>
 
 		<h1 class="label-title upper">Machine</h1>
 		<p>{{user.shooter.machine}}</p>
@@ -41,12 +41,16 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		
 		
 	</div>
-	<button ng-show="user.visitRequested !== true" ng-click="closeThisDialog(user.id)" class="btn btn-block green">
-			request visit
-	</button>
-	<button ng-show="user.visitRequested === true" ng-click="closeThisDialog(false)" class="btn btn-block">
-			Request Already Send
-	</button>
+	<div ng-if="currentUser._id !== user._id">
+		
+	
+		<button ng-show="user.visitRequested !== true" ng-click="closeThisDialog(user._id)" class="btn btn-block green">
+				request visit
+		</button>
+		<button ng-show="user.visitRequested === true" ng-click="closeThisDialog(false)" class="btn btn-block">
+				Request Already Send
+		</button>
+	</div>
 
 
 

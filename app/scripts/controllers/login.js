@@ -41,7 +41,10 @@
                 }
                 
 
-                API.register(end_user);
+                API.register(end_user, function(_currentUser){
+                   
+                    $rootScope.$emit('user.authenticated', _currentUser);
+                });
 
                 
             });
@@ -58,22 +61,30 @@
 
     this.registerUser = function(){
         $scope.showSpinner = true;
-        if(window.localStorage){
-            
-            window.localStorage.loginData = JSON.stringify($scope.registerInput);
-        }
+        
          
-        API.register($scope.registerInput);
+        API.register($scope.registerInput, function(_currentUser){
+            $rootScope.$emit('user.authenticated', _currentUser);
+            if(window.localStorage){
+                window.localStorage.loginData = JSON.stringify($scope.registerInput);
+            }
+            
+        });
 
     }
     this.loginUser = function(){
         $scope.showSpinner = true;
         
-        if(window.localStorage){
+        
+        API.login($scope.loginInput, function(_currentUser){
+            console.log('fired!');
+            console.log(_currentUser);
+            $rootScope.$emit('user.authenticated', _currentUser);
+            if(window.localStorage){
+                window.localStorage.loginData = JSON.stringify($scope.loginInput);
+            }
            
-            window.localStorage.loginData = JSON.stringify($scope.loginInput);
-        }
-        API.login($scope.loginInput);
+        });
     }
 
 

@@ -17,7 +17,9 @@ angular.module('coffeeshotsApp')
    if(window.localStorage && window.localStorage.loginData && typeof(window.localStorage.loginData) !== 'undefined'){
         
    		var loginData = JSON.parse(window.localStorage.loginData);
-      API.login(loginData);
+      API.login(loginData, function(_currentUser){
+          $rootScope.$emit('user.authenticated', _currentUser);
+      });
 
    } else {
         $timeout(function(){
