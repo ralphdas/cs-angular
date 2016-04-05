@@ -80,11 +80,11 @@
                 if(data.value === true){
                     // acccepted
                     
-                    
+                    var payment;
 
                     var clientIDs = {
                        "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
-                       "PayPalEnvironmentSandbox": "YOUR_SANDBOX_CLIENT_ID"
+                       "PayPalEnvironmentSandbox": "AYD0H8euf1JjfxBDI7b5Smc5tHsGWb3FKXazbJDgGBP4pkwicP_kHn5N62rCsK8SjNjPOz4dPPYWkPd-"
                      };
 
 
@@ -97,26 +97,28 @@
                         });
 
                         PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", configObj, function(){
-                            var description = _paypalDetails.cups+' cups of coffee with '+_paypalDetails.firstname+' '+_paypalDetails.lastname+' using the Coffee Shots App';
+                            var description = _paypalDetails.cups+' cups at '+_paypalDetails.firstname+' '+_paypalDetails.lastname+' using the Coffee Shots App';
                             var paymentDetails = new PayPalPaymentDetails(String(_paypalDetails.amount), "0.00", "0.00");
-                            var payment = new PayPalPayment(String(_paypalDetails.amount), "EURO", description, "", paymentDetails);
+                            payment = new PayPalPayment(String(_paypalDetails.amount), "EUR", description, "SALE", paymentDetails);
+                        
+
+                     
+                            window.PayPalMobile.renderSinglePaymentUI(payment, function success(_result){
+                               console.log('payment succeeded!');
+                               console.log(_result);
+
+                               API.acceptPayment($rootScope.currentUser._id, _paypalDetails.sender_id, _paypalDetails.amount, _paypalDetails.cups, _paypalDetails.payment_id);
+                            }, function failed(_result){
+                                console.log('payment failed :-(  ');
+                                console.log(_result);
+                            });
                         });
 
-                     });
 
 
 
 
 
-
-                    window.PayPalMobile.renderSinglePaymentUI(payment, function success(_result){
-                       console.log('payment succeeded!');
-                       console.log(_result);
-
-                       API.acceptPayment($rootScope.currentUser._id, _paypalDetails.sender_id, _paypalDetails.amount, _paypalDetails.cups, _paypalDetails.payment_id);
-                    }, function failed(_result){
-                        console.log('payment failed :-(  ');
-                        console.log(_result);
                     }); 
                     
                 }
@@ -290,6 +292,10 @@
         $scope.$on('invite_accepted_dialog', function(event, data){
             var newScope = $scope.$new();
             newScope.user = data;
+            newScope.openInGoogleMaps = function(){
+                var url = 'http://maps.google.com/?q='+newScope.user.shooter.address.street+'%20'+newScope.user.shooter.address.city;
+                window.open(url, '_system');
+            }
             var acceptDialog = ngDialog.open({
                 templateUrl: 'views/invite_accepted_dialog.html',
                 scope: newScope,

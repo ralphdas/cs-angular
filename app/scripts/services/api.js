@@ -11,7 +11,7 @@ angular.module('coffeeshotsApp')
   .factory('API', function (socketFactory, $cookies, $rootScope, $location) {
     // Service logic
     // ...
-    window.socket = socketFactory({ ioSocket: window.io.connect('localhost:3000') });
+    window.socket = socketFactory({ ioSocket: window.io.connect('http://130.255.75.69:3000') });
    
 
     socket.on('user.deauthenticated', function(){

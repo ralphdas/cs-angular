@@ -14,6 +14,7 @@ angular.module('coffeeshotsApp')
       controller: function($scope, API, $location){
       	//API.getAlerts($rootScope.currentUser._id);
       	
+        
         var unwatch = $rootScope.$watch('currentUser', function(newValue){
           if(newValue){
             unwatch();
@@ -44,10 +45,53 @@ angular.module('coffeeshotsApp')
           }
           
         }
-
+        var alert_ids = [];
+        var alert_updates = 0;
+        function detectNewAlertIndex(_alerts){
+          var new_entry_index = false;
+          for (var i = 0; i < _alerts.length; i++) {
+            var index = alert_ids.indexOf(_alerts[i]._id);
+            if(index === -1){
+              // new entry
+              new_entry_index = i;
+            }
+          }
+          return new_entry_index;
+        }
+        function storeAlertIds(_alerts){
+           for (var i = 0; i < _alerts.length; i++) {
+              alert_ids.push(_alerts[i]._id);
+           }
+        }
+        
         
       	$scope.$on('user.alerts', function(event, data){
-      		$scope.alerts = data;
+      	   
+            if(detectNewAlertIndex(data)){
+               var audio = new Audio('sounds/notification.mp3');
+               audio.play();
+
+               navigator.vibrate(1000);
+            }
+            if(detectNewAlertIndex(data) && alert_updates > 0){
+             
+
+              var new_alert_index = detectNewAlertIndex(data);
+              $scope.selectAlert(data[new_alert_index]);
+              
+
+            }
+            
+
+            storeAlertIds(data);
+
+            // play sound
+            
+          
+          $scope.alerts = data;
+          alert_updates++;
+          
+
       	});
         $rootScope.$on('user.get_updates', function(){
           getUpdates();

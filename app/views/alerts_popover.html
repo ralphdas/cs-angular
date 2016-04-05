@@ -7,7 +7,7 @@
 <div ng-class="{'not-showing':!isVisible}" ng-hide="!isVisible" class="alerts-container">
 	<div class="scroll-container">
 		<div class="list-container">
-			<div ng-repeat="alert in alerts" class="media" ng-click="selectAlert(alert)">
+			<div ng-repeat="alert in alerts | orderBy:'-created'" class="media" ng-click="selectAlert(alert)">
 			  <div class="media-left">
 			    <a href="#">
 			      <img class="user-avatar small" ng-src="{{alert.sender.image}}" alt="...">
