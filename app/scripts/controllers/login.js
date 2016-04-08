@@ -16,51 +16,19 @@
     $scope.showSpinner = true;
 
     $timeout(function(){
+       
         $scope.showSpinner = false;
     }, 1500);
     $scope.loginInput = {};
     $scope.registerInput = {};
 
-    /*
-    this.facebookLogin = function(){
-        var options ={
-            'scope':'email',
-        }
-
-        $scope.showSpinner = true;
-        hello('facebook').login(options).then(function(_result){
-            alert('GOT RESULT');
-            console.log(_result);
-            hello('facebook').api('/me').then(function(_user) {
-                
-                var end_user = {
-                    firstname : _user.first_name,
-                    lastname : _user.last_name,
-                    image :  _user.thumbnail+'?type=large',
-                    email : _user.email,
-                    fb_id: _user.id
-
-                }
-                
-
-                API.register(end_user, function(_currentUser){
-                   
-                    $rootScope.$emit('user.authenticated', _currentUser);
-                });
-
-                
-            });
-        }
-
-        );
-    }
-    */
+    
    
    this.facebookLogin = function(){
      var url = 'https://www.facebook.com/dialog/oauth?client_id=1686745721565298&response_type=token&redirect_uri=http://coffeeshots.servebeer.com&scope=public_profile,email';
      var target = '_blank';
 
-     var ref = cordova.InAppBrowser.open(url, target);
+     var ref = cordova.InAppBrowser.open(url, target, 'clearcache=yes');
      
      function myCallBackHandler(event){
         console.log(event);

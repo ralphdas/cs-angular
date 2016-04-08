@@ -24,9 +24,25 @@ angular.module('coffeeshotsApp')
         return correct;
     }
 
-    setInterval(function(){
-        checkServing();
-    }, 1000);
+
+    function init(){
+        var endTime = $rootScope.currentUser.shooter.open_until;
+        if (!checkTime(endTime)){
+            $rootScope.currentUser.shooter.open_until = 0;
+        }
+        setInterval(function(){
+            checkServing();
+        }, 1000);
+
+    }
+    var unwatch = $rootScope.$watch('currentUser', function(currentUser){
+        if(currentUser){
+            init();
+            checkServing();
+            unwatch();
+        }
+    });
+    
 
     function checkServing(){
         if(typeof($rootScope.currentUser) === 'undefined'){
@@ -49,6 +65,9 @@ angular.module('coffeeshotsApp')
          return correct;
     }
     var lastToggle = 0;
+
+
+    
     $scope.toggleServing = function(){
         var now = new Date().getTime();
 
@@ -68,6 +87,23 @@ angular.module('coffeeshotsApp')
         if($rootScope.currentUser.shooter.is_serving){
             $rootScope.currentUser.shooter.is_serving = false;
             $rootScope.currentUser.open_until = 0;
+
+            if($rootScope.currentUser.shooter.guests.length){
+                for (var i = 0; i < $rootScope.currentUser.shooter.guests.length; i++) {
+                    var guest = $rootScope.currentUser.shooter.guests[i];
+                    var guest_status = guest.status;
+                    var drinking_costs = guest.drinking_costs;
+                    var cups = guest.cups;
+                    var guest_id = guest.user_id;
+                    var payment_id = guest.payment_id;
+                    if(guest_status === 0 && drinking_costs > 0){
+                        API.requestPayment(rootScope.currentUser._id, guest_id, payment_id, drinking_costs, cups, function(){
+
+                        });
+                    }
+                };
+            }
+
             API.stopServing({
                 '_id':  $rootScope.currentUser._id,
                 'shooter': $rootScope.currentUser.shooter

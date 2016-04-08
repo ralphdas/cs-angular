@@ -11,7 +11,10 @@ angular.module('coffeeshotsApp')
   .factory('API', function (socketFactory, $cookies, $rootScope, $location) {
     // Service logic
     // ...
-    window.socket = socketFactory({ ioSocket: window.io.connect('http://130.255.75.69:3000') });
+    // live 
+     window.socket = socketFactory({ ioSocket: window.io.connect('http://api.coffeeshots.nl:3000') });
+    // local 
+     //window.socket = socketFactory({ ioSocket: window.io.connect('http://localhost:3000') });
    
 
     socket.on('user.deauthenticated', function(){
@@ -87,6 +90,11 @@ angular.module('coffeeshotsApp')
             
           }
         }); 
+      },
+      removeUser: function(_id, cb){
+        socket.emit('user.remove_account', _id, function(_id){
+          cb(true);
+        });
       },
       getUserDetails: function(_id){
         socket.emit('user.get_details', _id, function(_userDetails){

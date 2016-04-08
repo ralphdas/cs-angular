@@ -7,14 +7,14 @@ body, html{
   outline: 0;
 }
 .btn-group {
-    width: 101% !important;
+    width: 103% !important;
 }
 
 .stick-to-bottom{
 	position: absolute;
     width: 100%;
     bottom: 0px;
-    left: 0;
+    left: -5px;
 }
 .stick-to-topbar{
     position: fixed;
@@ -51,6 +51,8 @@ img.rating-star.selected {
     background-size: cover;
     box-shadow: inset 0px -5px 30px #000;
     animation: backgroundScroll 40s linear infinite;
+    float: left;
+    width: 100%;
 }
 
 .light-bean-pattern-bg{
@@ -58,6 +60,8 @@ img.rating-star.selected {
     background-size: cover;
     box-shadow: inset 0px -5px 30px #FFF;
     animation: backgroundScroll 40s linear infinite;
+     float: left;
+    width: 100%;
 }
 .scroll-container{
     padding-bottom: 140px;
@@ -84,5 +88,10 @@ img.rating-star.selected {
 
 .bar-padding {
     padding-top: 65px;
+}
+.label {
+    background: #888;
+    position: relative;
+    top: -2px;
 }
 

@@ -13,7 +13,7 @@ angular.module('coffeeshotsApp')
     
    
 
-    
+      
    if(window.localStorage && window.localStorage.loginData && typeof(window.localStorage.loginData) !== 'undefined'){
         
    		var loginData = JSON.parse(window.localStorage.loginData);

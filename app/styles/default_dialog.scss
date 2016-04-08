@@ -39,9 +39,11 @@
     margin-right: 10px;
     margin-left: -22px;
     border: none;
-    background: url('../images/closeicon.svg');
-    background-size: cover;
+    background: url(../images/closeicon.svg) no-repeat;
+    background-size: contain;
     height: 12px;
     width: 12px;
-    background-repeat: no-repeat;
+    position: absolute;
+    right: 0px
+  
 }

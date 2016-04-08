@@ -22,7 +22,9 @@ angular.module('coffeeshotsApp')
      		returnValue  = Math.floor(secRemaining / 86400)+' days'
      	}
      	if(secRemaining > 3600 && secRemaining < 86400){
-     		returnValue  = Math.floor(secRemaining / 3600)+' hours'
+     		var hours = Math.floor(secRemaining / 3600);
+            var min = Math.floor((secRemaining - (hours * 3600))/ 60);
+            returnValue  = hours+' hours and '+min+' min.' 
      	}
      	if(secRemaining > 60 && secRemaining < 3600){
      		returnValue  = Math.floor(secRemaining / 60)+' minutes'

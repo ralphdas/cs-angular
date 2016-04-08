@@ -84,7 +84,7 @@
 
                     var clientIDs = {
                        "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
-                       "PayPalEnvironmentSandbox": "AYD0H8euf1JjfxBDI7b5Smc5tHsGWb3FKXazbJDgGBP4pkwicP_kHn5N62rCsK8SjNjPOz4dPPYWkPd-"
+                       "PayPalEnvironmentSandbox": "AQDVZoXBDDFPjgDmPxtqTpr3JM2Y60Q1TAEPQ1ItsQmJJjYyKtKA-qNuRtPZgblYhfW4-txbX1F27lZr"
                      };
 
 
@@ -390,6 +390,9 @@
         	});
             drinksDialog.closePromise.then(function(data){
                 console.log(data);
+                if(typeof(data.value) === 'undefined' || data.value === null){
+                    return;
+                }
                 if(data.value.action=== 'left'){
                     API.clearGuest($rootScope.currentUser._id, data.value.id);
 

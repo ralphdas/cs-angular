@@ -1,12 +1,12 @@
-<div ng-repeat="review in reviews" class="row review-container">
-	<div class="col-xs-12">
+<div ng-repeat="review in reviews track by review._id" class="row review-container">
+	<div class="col-xs-12 review-entry">
 		
 		
 		<img ng-src="{{review.image}}" alt="" class="user-avatar small">
 		
 		<div class="rating" style="" rating-value="{{review.stars}}"></div>
 		
-		<p class="small" >{{review.username}}, {{(review.date * 1000) | date : 'dd/MM/yyyy'}}</p>
+		<p class="small" >{{review.firstname}} {{review.lastname}}, {{(review.date * 1000) | date : 'dd/MM/yyyy'}}</p>
 		
 		<div class="col-xs-12 description"><p>{{review.description}}</p> </div>
 	</div>

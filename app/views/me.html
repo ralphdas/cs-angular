@@ -14,7 +14,7 @@
 
 		<h1 class="label-title upper">Stats</h1>
 		<div class="wrapper clearfix text-center">
-			<div dash-size="large" dash-format="currency" dash-value="{{currentUser.shooter.stats.revenue * 0.02}}" dash-label="FARMER
+			<div dash-size="large" dash-format="currency" dash-value="{{(currentUser.shooter.stats.revenue + currentUser.stats.drinking_costs) * 0.02}}" dash-label="FARMER
 PROFITS EURO (±)" class="dash-counter clearfix"></div>
 		</div>
 		<div class="wrapper clearfix text-center">
@@ -46,7 +46,7 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 			
 		</div>
 		<div class="col-xs-12">
-			<h1 class="label-title upper">Reviews</h1>
+			<h1 class="label-title upper">Reviews <span class="label">0</span></h1> 
 			<div class="reviews" review-source="currentUser.shooter.reviews"></div>
 		</div>
 		<div class="col-xs-12">
@@ -86,7 +86,8 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 					
 			</li>
 		</ul>
-		<button ng-click="logoutUser()" class="btn btn-block red">LOGOUT</button>
+		<button ng-click="logoutUser()" class="btn btn-block red">Logout</button>
+		<button ng-click="removeUser()" class="btn btn-block red">Delete Account</button>
 
 	</div>
 	

@@ -35,8 +35,10 @@
 
  	$rootScope.block_login = false;
 
-
+ 	
  	$rootScope.$on('$locationChangeStart', function (event, next, current) {
+
+ 		
 
  		if(next.indexOf('/login') !== -1 && $rootScope.block_login){
  			event.preventDefault();
@@ -49,9 +51,9 @@
  			return false;
  		}
 
-
-
  	});
+
+
 
 
 	// FAstclick implementation

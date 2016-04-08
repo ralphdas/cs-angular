@@ -68,10 +68,11 @@ angular.module('coffeeshotsApp')
       	$scope.$on('user.alerts', function(event, data){
       	   
             if(detectNewAlertIndex(data)){
+               console.log('playing audio!!');
                var audio = new Audio('sounds/notification.mp3');
                audio.play();
-
                navigator.vibrate(1000);
+
             }
             if(detectNewAlertIndex(data) && alert_updates > 0){
              
