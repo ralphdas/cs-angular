@@ -17,6 +17,7 @@ angular.module('coffeeshotsApp')
      //window.socket = socketFactory({ ioSocket: window.io.connect('http://localhost:3000') });
    
 
+    // TODO: I don't think these get any more calls and should be removed... 
     socket.on('user.deauthenticated', function(){
       $rootScope.$broadcast('user.deauthenticated', []);
     });
@@ -32,21 +33,21 @@ angular.module('coffeeshotsApp')
       $rootScope.$broadcast('user.shooters_around', _shooterData);
     });
     
-    
-      
      
-
-
-     
-
-      
-      
-
-
-
     socket.on('user.alerts', function(_alerts){
       $rootScope.$broadcast('user.alerts', _alerts);
     });
+      
+     
+
+
+     
+
+      
+      
+
+
+
      
 
       
@@ -180,6 +181,26 @@ angular.module('coffeeshotsApp')
       submitRating: function(_userId, _userIdHost, _rating, _description){
          socket.emit('user.submit_rating', {'id': _userId, 'host_id': _userIdHost, 'stars':_rating, 'description':_description}, function(){
             $rootScope.$emit('get_updates');
+         });
+      },
+      submitBankDetails: function(_userId, _account_name, _iban, _bic){
+         socket.emit('user.submit_bank_details', {'id': _userId, 'account_name':_account_name, 'iban':_iban, 'bic':_bic}, function(_currentUser){
+            $rootScope.currentUser = _currentUser;
+            $rootScope.$emit('get_updates');
+         });
+      },
+      submitRegistrationId: function(_registrationData){
+        socket.emit('user.submit_push_token', _registrationData, function(_currentUser){
+            console.log('result of registration submit: ');
+            console.log(_currentUser);
+         });
+
+      },
+      resetPushCount : function(_userId){
+        socket.emit('user.reset_push_count', _userId, function(_currentUser){
+            console.log('Push count resetted');
+            
+            $rootScope.$emit('push_count_reset');
          });
       }
 

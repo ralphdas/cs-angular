@@ -18,9 +18,22 @@ angular.module('coffeeshotsApp')
         }
         destroyCredentialsAndReload();
      }
+     
+     $scope.$watch('currentUser.shooter.account', function(accountObj){
+         console.log(typeof(accountObj));
+         if(typeof(accountObj) === 'object'){
+             $scope.account_info_present = true;
+         } else {
+             $scope.account_info_present = false;
+         }
+     });
 
      $scope.removeUser = function(){
-         if($rootScope.currentUser.shooter.is_serving){
+        var user_confirmed = window.confirm('Are you sure you want to permanently delete you account?');
+        if(!user_confirmed){
+            return;
+        }
+        if($rootScope.currentUser.shooter.is_serving){
            window.alert('Please your serving session before removing your account.');
            return;
         }
@@ -45,6 +58,10 @@ angular.module('coffeeshotsApp')
     	if(_type == 'bio'){
     		$scope.$emit('edit_bio_dialog');
     	}
+        if(_type == 'bank'){
+    		$scope.$emit('show_bank_details_dialog');
+    	}
+        
     	
     	
     }

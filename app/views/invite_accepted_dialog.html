@@ -1,6 +1,6 @@
 <div class="dark-bean-pattern-bg">
 	<div class="col-xs-12 text-center">
-		<button ng-click="closeThisDialog()" class="close-button pull-right"></button>
+		<button ng-click="closeThisDialog()" class="close-button"></button>
 		<img ng-src="{{user.image}}" alt="" class="user-avatar">
 		<h1 class="large-title white">{{user.firstname}} {{user.lastname}}</h1>
 	</div>
@@ -8,19 +8,28 @@
 
 	<div class="col-xs-12">
 		<h4 class="label-title">{{user.firstname}} accepted your Request</h4>
-		<p>{{user.firstname}}'s Address:<br>
-		<b>
-		{{user.shooter.address.street}}<br>
-		{{user.shooter.address.postal_code}}<br>
+		<p>{{user.firstname}}'s details:<br>
+		{{user.shooter.address.street}} {{user.shooter.address.postal_code}}<br>
 		{{user.shooter.address.city}}<br>
-
-		</b>
-		
 		</p>
 		
+		<a ng-if="user.shooter.address.phone !== ''" href="#">
+			<button ng-click="sendSMS(user.shooter.address.phone)" class="btn btn-block green">
+				Send SMS Message
+			</button>
+		</a>
+		<br>	
 		<a target="_blank" href="#" ng-click="openInGoogleMaps()">
 			<button class="btn btn-block blue">Open in Google Maps</button>
 		</a>
+			
+			
+		
+
+		
+		
+		
+		
 		
 
 		

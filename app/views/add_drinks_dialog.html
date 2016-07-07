@@ -1,6 +1,6 @@
 <div class="dark-bean-pattern-bg">
 	<div class="col-xs-12 text-center">
-		<button ng-click="closeThisDialog()" class="close-button pull-right"></button>
+		<button ng-click="closeThisDialog()" class="close-button"></button>
 		<img ng-src="{{user.image}}" alt="" class="user-avatar medium">
 		<h1 class="large-title white">{{user.firstname}} {{user.lastname}}</h1>
 	</div>
@@ -30,7 +30,7 @@
 	<br>
 	<br>
 	<p>
-		Payment request submitted. When the user pays the outstanding amount of: {{user.drinking_costs}} Euro, you will receive an alert.  
+		Payment request submitted. When the user pays the outstanding amount of: {{user.drinking_costs | currency:'€'}}, you will receive an alert.  
 	</p>
 </div>
 

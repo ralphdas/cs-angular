@@ -2,6 +2,8 @@ body, html{
     height: 100%;
     outline: none;
     background: #FFF;
+    user-select: none;
+    -webkit-user-select: none;
 }
 :focus {
   outline: 0;

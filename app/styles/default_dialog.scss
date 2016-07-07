@@ -35,15 +35,14 @@
   animation: bounceOut 0.5s;
 }
 .default-dialog .close-button {
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-left: -22px;
     border: none;
     background: url(../images/closeicon.svg) no-repeat;
-    background-size: contain;
-    height: 12px;
-    width: 12px;
+    background-size: 35%;
+    height: 55px;
+    width: 55px;
     position: absolute;
-    right: 0px
+    right: 0px;
+    top: 0;
+    background-position: center center;
   
 }

@@ -1,4 +1,4 @@
-<div class="row light-bean-pattern-bg">
+<div class="row light-bean-pattern-bg" style="float: none; width: inherit;">
 	<div class="col-xs-12 text-center">
 		<img ng-src="{{currentUser.image}}" alt="" class="user-avatar">
 		<h1 class="large-title">{{currentUser.firstname}} {{currentUser.lastname}}</h1>
@@ -11,6 +11,11 @@
 		<button ng-click="showDialog('bio')" class="btn edit-btn"></button>
 		<p class="grey" ng-if="currentUser.bio === ''">Not set yet</p>
 		<p ng-if="currentUser.bio !== ''">{{currentUser.bio}}</p>
+		
+		<h1 class="label-title upper">Bank Details</h1>
+		<button ng-click="showDialog('bank')" class="btn edit-btn"></button>
+		<p class="grey" ng-if="!account_info_present">Not set yet</p> 
+		<p ng-if="account_info_present">{{currentUser.shooter.account.iban}}</p>
 
 		<h1 class="label-title upper">Stats</h1>
 		<div class="wrapper clearfix text-center">
@@ -46,7 +51,7 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 			
 		</div>
 		<div class="col-xs-12">
-			<h1 class="label-title upper">Reviews <span class="label">0</span></h1> 
+			<h1 class="label-title upper">Reviews <span class="label">{{currentUser.shooter.reviews.length}}</span></h1> 
 			<div class="reviews" review-source="currentUser.shooter.reviews"></div>
 		</div>
 		<div class="col-xs-12">
@@ -79,7 +84,7 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 					
 			</li>
 			<li class="list-item">
-				<a href="http://www.coffeeshots.nl" target="_blank">
+				<a href="mailto:support@coffeeshots.nl" target="_blank">
 					<p>Contact us</p>
 					<div class="navout-arrow"></div>
 				</a>
@@ -87,6 +92,7 @@ PROFITS EURO (±)" class="dash-counter clearfix"></div>
 			</li>
 		</ul>
 		<button ng-click="logoutUser()" class="btn btn-block red">Logout</button>
+		<br>
 		<button ng-click="removeUser()" class="btn btn-block red">Delete Account</button>
 
 	</div>

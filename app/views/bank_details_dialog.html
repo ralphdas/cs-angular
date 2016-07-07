@@ -1,0 +1,25 @@
+<div class="col-xs-12">
+	<h1 class="label-title">Bank Details</h1>
+    <p>To transfer the revenue back to you as a Home Barista we need to have your Bank account details.</p>
+	<div class="form-group">
+		<input type="text" ng-model="account.name"  maxlength="100" placeholder="Account Name" class="form-control"></input>
+	</div>
+    <div class="form-group">
+		<input type="text" ng-model="account.iban"  maxlength="36" placeholder="IBAN code" class="form-control"></input>
+	</div>
+    <div class="form-group">
+		<input type="text" ng-model="account.bic" maxlength="140" placeholder="BIC/ SWIFT Code" class="form-control"></input>
+	</div>
+
+
+</div>
+
+<div class="btn-group stick-to-bottom">
+	<button ng-click="closeThisDialog(false)" class="btn col-xs-6">
+			Cancel
+	</button>
+
+	<button ng-click="closeThisDialog(account)" class="btn col-xs-6 green">
+			Apply Changes
+	</button>
+</div>

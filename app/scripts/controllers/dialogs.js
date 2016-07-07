@@ -50,7 +50,36 @@
                     API.changeBio($rootScope.currentUser._id, data.value);  
         		}
         	});
+        });
+        // show bank details dialog
+        $scope.$on('show_bank_details_dialog', function(event, data){
+        	
+            var newScope = $scope.$new();
+        	if($rootScope.currentUser.shooter.account){
+                newScope.account = $rootScope.currentUser.shooter.account;
+            } else {
+                newScope.account = {};
+            }
+                
+
+        	var bankPopup = ngDialog.open({
+        		templateUrl: 'views/bank_details_dialog.html',
+        		scope: newScope,
+        		className: 'default-dialog'
+        	});
+
+        	bankPopup.closePromise.then(function(data){
+        	   
+                if((data.value)  && data.value !== '$document'){
+                    $rootScope.currentUser.shooter.account = data.value;  
+                    var account = data.value;
+                    API.submitBankDetails($rootScope.currentUser._id, account.name, account.iban, account.bic, function(){
+                        console.log('account detais submitted');
+                    });  
+        		}
+        	});
         }); 
+         
 
 
         // Edit the user biography
@@ -83,7 +112,7 @@
                     var payment;
 
                     var clientIDs = {
-                       "PayPalEnvironmentProduction": "YOUR_PRODUCTION_CLIENT_ID",
+                       "PayPalEnvironmentProduction": "AZpHWMexoqqJvQiJai-P8Dj8VrBlevCaWN_g4ZV7RF8lupjV9xVh3pa_qPeTDofpETtsZB3ugYjUJqKM",
                        "PayPalEnvironmentSandbox": "AQDVZoXBDDFPjgDmPxtqTpr3JM2Y60Q1TAEPQ1ItsQmJJjYyKtKA-qNuRtPZgblYhfW4-txbX1F27lZr"
                      };
 
@@ -96,7 +125,7 @@
                             merchantUserAgreementURL: "http://www.coffeeshots.nl/algemene-voorwaarden"
                         });
 
-                        PayPalMobile.prepareToRender("PayPalEnvironmentSandbox", configObj, function(){
+                        PayPalMobile.prepareToRender("PayPalEnvironmentProduction", configObj, function(){
                             var description = _paypalDetails.cups+' cups at '+_paypalDetails.firstname+' '+_paypalDetails.lastname+' using the Coffee Shots App';
                             var paymentDetails = new PayPalPaymentDetails(String(_paypalDetails.amount), "0.00", "0.00");
                             payment = new PayPalPayment(String(_paypalDetails.amount), "EUR", description, "SALE", paymentDetails);
@@ -171,18 +200,21 @@
                         var _street = data.value.street;
                         var _city = data.value.city;
                         var _postal_code = data.value.postal_code;
+                        var _phone = data.value.phone;
                         if(_geoResults){
-                            var geo = {
-                                lat: _geoResults[0].geometry.location.lat(),
-                                lng: _geoResults[0].geometry.location.lng()
-                            }
-                            
-                            // Set this in the API
                             $timeout(function(){
+                                var geo = {
+                                    lat: _geoResults[0].geometry.location.lat(),
+                                    lng: _geoResults[0].geometry.location.lng()
+                                }
+                            
+                                // Set this in the API
+                            
                                 $rootScope.currentUser.shooter.address.street = _street;
                                 $rootScope.currentUser.shooter.address.city = _city;
                                 $rootScope.currentUser.shooter.address.postal_code = _postal_code;
                                 $rootScope.currentUser.shooter.address.geo = geo;
+                                $rootScope.currentUser.shooter.address.phone = _phone;
                                 $rootScope.currentUser.shooter.address.geo_point = [geo.lat, geo.lng];
 
                             });
@@ -204,10 +236,16 @@
 
         // shooter change time dialog
         $scope.$on('show_time_dialog', function(event, data){
-
+            var newScope = $scope.$new();
+            if($rootScope.currentUser.shooter.open_until > (Date.now() / 1000)){
+                newScope.openUntill = new Date(Math.floor($rootScope.currentUser.shooter.open_until * 1000));
+            } else {
+                newScope.openUntill = new Date();
+            }
+            
         	var timePopup = ngDialog.open({
         		templateUrl: 'views/time_picker_dialog.html',
-
+                scope: newScope,
         		className: 'default-dialog'
         	});
 
@@ -221,7 +259,7 @@
         			desired_time = new Date(desired_time).setMinutes(minutes);
 
 
-        			$rootScope.currentUser.shooter.open_until = desired_time / 1000;
+        			$rootScope.currentUser.shooter.open_until = Math.floor(desired_time / 1000);
 
         		}
         	});
@@ -292,10 +330,18 @@
         $scope.$on('invite_accepted_dialog', function(event, data){
             var newScope = $scope.$new();
             newScope.user = data;
+            newScope.sendSMS = function(_tel){
+                var url = 'sms:'+_tel;
+                window.open(url, '_system');
+            };
+            newScope.startCall = function(_tel){
+                var url = 'tel:'+_tel;
+                window.open(url, '_system');
+            };
             newScope.openInGoogleMaps = function(){
                 var url = 'http://maps.google.com/?q='+newScope.user.shooter.address.street+'%20'+newScope.user.shooter.address.city;
                 window.open(url, '_system');
-            }
+            };
             var acceptDialog = ngDialog.open({
                 templateUrl: 'views/invite_accepted_dialog.html',
                 scope: newScope,
@@ -367,6 +413,12 @@
                 
                 API.requestPayment($rootScope.currentUser._id, newScope.user.user_id, newScope.user.payment_id,  newScope.user.drinking_costs, newScope.user.cups_drunk, function(_guest){
                      newScope.user = _guest;
+                     var guest_array = $rootScope.currentUser.shooter.guests;
+                     for (var i = 0; i < guest_array.length; i++) {
+                         if(guest_array[i].user_id === _guest.user_id){
+                            guest_array[i] = _guest;
+                         }
+                     };
                 });
                 
                 
@@ -395,12 +447,13 @@
                 }
                 if(data.value.action=== 'left'){
                     API.clearGuest($rootScope.currentUser._id, data.value.id);
-
-                    $rootScope.currentUser.shooter.guests.forEach(function(guest, index){
-                    if(guest.id === data.value.id){
-                         $rootScope.currentUser.shooter.guests.splice(index, 1);
-                    }
-                }); 
+                    var guest_array = $rootScope.currentUser.shooter.guests;
+                     for (var i = 0; i < guest_array.length; i++) {
+                         if(guest_array[i].user_id === data.value.id){
+                            guest_array.splice(i, 1);
+                         }
+                     };
+                    
                 }
             });
         });	

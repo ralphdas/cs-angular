@@ -81,7 +81,7 @@ angular.module('coffeeshotsApp')
         var shooterObj = $rootScope.currentUser.shooter;
         var is_serving = $rootScope.currentUser.shooter.is_serving;
         if(!formattingCorrect && !is_serving){
-            alert('Please set a correct Closing Time and Address.');
+            window.alert('Please set a correct Closing Time and Address.');
             return;
         }
         if($rootScope.currentUser.shooter.is_serving){

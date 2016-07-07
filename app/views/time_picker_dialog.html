@@ -1,7 +1,19 @@
 <div class="col-xs-12">
-	<h1 class="label-title">Edit your End Time:</h1>
+	<h1 class="label-title">Tap to change your End Time</h1>
 	<div class="form-group">
-		<input ng-model="openUntill" type="time" class="form-control">
+		<script>
+			setTimeout(function(){
+				$('#timepicker').focus();
+			}, 500);
+			
+		</script>
+		<label style="width:100%" for="timepicker">
+			<div class="col-xs-12 text-center">
+				
+				<h1 style="font-weight: 100; font-size: 62px;">{{openUntill | date:'H:mm'}}</h1>
+			</div>
+			<input style="opacity:0" id="timepicker" ng-model="openUntill" type="time" class="form-control">
+		</label>
 	</div>
 
 

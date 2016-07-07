@@ -33,7 +33,7 @@
 					<button ng-click="showDialog('time')" ng-hide="currentUser.shooter.is_serving" class="btn edit-btn"></button>
 					
 					<p class="grey" ng-if="currentUser.shooter.open_until === 0">Not set yet</p>
-					<p ng-if="currentUser.shooter.open_until !== 0">Open untill {{(currentUser.shooter.open_until * 1000) | date : 'HH:MM dd/MM/yyyy'}}</p>
+					<p ng-if="currentUser.shooter.open_until !== 0">Open untill {{(currentUser.shooter.open_until * 1000) | date : 'HH:mm dd/MM/yyyy'}}</p>
 
 					<h1 class="label-title upper">Description</h1>
 					<button ng-click="showDialog('description')" ng-hide="currentUser.shooter.is_serving" class="btn edit-btn"></button>

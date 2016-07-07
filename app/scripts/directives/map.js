@@ -20,6 +20,7 @@
  			
  			function onShooters(data){
  				shooters = data;
+				
  				$scope.markers = createMarkers(data);
  				if(currentPosMarker){
  					$scope.markers.push(currentPosMarker);
@@ -80,20 +81,20 @@
  				}, 1000);
  				
  			}
-
- 			IPtoGeo.retrieve(function(data){
- 				
+			 	
+ 			function init(){
+ 				//52.3702160,4.8951680
  				$scope.centerPoint = {
- 					lat: data.lat,
- 					lng: data.lon,
- 					zoom: 14
+ 					lat: 52.3702160,
+ 					lng: 4.8951680,
+ 					zoom: 16
  				}
- 				$scope.$parent.latitude = data.lat;
- 				$scope.$parent.longitude = data.lon;
+ 				$scope.$parent.latitude = 52.3702160;
+ 				$scope.$parent.longitude = 4.8951680;
 
  				API.getShooters({
-	 				lat: data.lat,
-	 				lng: data.lon,
+	 				lat: $scope.centerPoint.lat,
+	 				lng: $scope.centerPoint.lng,
 	 				radius: 1000
 	 			}, onShooters);
 	 			setInterval(function(){
@@ -104,7 +105,8 @@
 	 				}, onShooters);
 	 			}, 15000);
  				
- 			});
+			 }
+			 init();
 
  			
 
@@ -178,7 +180,7 @@
  				centerPoint: {
  					lat: 52.3702160,
  					lng: 4.8951680,
- 					zoom: 5
+ 					zoom: 8,
  				},
  				defaults: {
  					tileLayer: 'https://api.mapbox.com/v4/'+mapBoxMapId+'/{z}/{x}/{y}.png?access_token=' + accessTokenMapBox,

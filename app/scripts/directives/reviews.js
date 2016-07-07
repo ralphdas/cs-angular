@@ -13,9 +13,14 @@ angular.module('coffeeshotsApp')
       restrict: 'AC',
       link: function postLink(scope, element, attrs) {
        	attrs.$observe('reviewSource', function(_value){
-       		scope.$watch(attrs.reviewSource, function(_value){
-       			scope.reviews = _value;
-       		});
+       		 if(typeof(_value) === 'string'){
+              scope.$watch(attrs.reviewSource, function(_value){
+                //console.log(_value.reverse());
+                _value.reverse();
+                scope.reviews = _value;
+              });   
+           }
+           
        		
 
        	});

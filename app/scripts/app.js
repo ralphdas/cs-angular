@@ -22,8 +22,13 @@
  	'ngCordova'
  	])
 
- .run(function($rootScope, $route, API, $location, ngDialog, $timeout){
+ .run(function($rootScope, $route, API, $location, ngDialog, $timeout, PushService){
 
+ 	if(typeof(navigator.notification) !== 'undefined' && navigator.notification !== null){
+ 		window.alert = navigator.notification.alert;
+ 		window.confirm = navigator.notification.confirm;
+ 	}
+ 	
 
  	var hello = window.hello;
  	var currentUserId;
@@ -56,12 +61,12 @@
 
 
 
-	// FAstclick implementation
-	FastClick.attach(document.body);
+	// Fastclick implementation
+	window.FastClick.attach(document.body);
 
 	// offline
 	document.addEventListener("offline", function(){ 
-		alert("Oops! It seems you are offline. Please Connect to the Internet to use Coffee Shots.") 
+		window.alert("Oops! It seems you are offline. Please Connect to the Internet to use Coffee Shots.") 
 	}, false);
 	
 	hello.on('auth.login', function(auth) {
@@ -89,10 +94,13 @@
 	$rootScope.$on('user.authenticated', function(event, data){
 		
 		$rootScope.currentUser = data;
-		console.log('Done');
+		
 		var ls = window.localStorage;
 		$rootScope.block_login = true;
-		console.log('FIRE');
+		
+
+
+		
 		if(window.localStorage.welcome_shown === "true"){
 
 			$location.path('/drink');
@@ -103,6 +111,7 @@
 			}, 2000);
 			
 		}
+		PushService.init();
 
 
 	});
