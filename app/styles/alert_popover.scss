@@ -6,13 +6,18 @@
     position: absolute;
     right: 20px;
     top: 17px;
+    
     .alert-icon{
-    	background: url('../images/alerticon.svg');
+    	background: url('../images/alerticon-grey.svg');
     	height: 23px;
 	    width: 27px;
 	    background-size: cover;
 	    position: absolute;
     	z-index: 2000;
+
+        &.activated{
+            background: url('../images/alerticon.svg');
+        }
 
     }
 }

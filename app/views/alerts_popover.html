@@ -1,7 +1,7 @@
 <div ng-if="alerts.length > 0" class="alert-counter">
 	{{alerts.length}}
 </div>
-<div class="alert-icon">
+<div class="alert-icon" ng-class="{'activated':alerts.length > 0}">
 	&nbsp;
 </div>
 <div ng-class="{'not-showing':!isVisible}" ng-hide="!isVisible" class="alerts-container">

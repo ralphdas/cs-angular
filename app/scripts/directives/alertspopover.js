@@ -7,11 +7,11 @@
  * # alertsPopover
  */
 angular.module('coffeeshotsApp')
-  .directive('alertsPopover', function ($rootScope, $window) {
+  .directive('alertsPopover', function ($rootScope, $window, API) {
     return {
       templateUrl: 'views/alerts_popover.html',
       restrict: 'AC',
-      controller: function($scope, API, $location){
+      controller: function($scope, $location){
       	//API.getAlerts($rootScope.currentUser._id);
       	
         
@@ -138,8 +138,15 @@ angular.module('coffeeshotsApp')
        		scope.isVisible = false;
        		function togglePopover(){
        			scope.$apply(function(){
-       				scope.isVisible = !scope.isVisible;
+                if(scope.alerts.length > 0){
+                   scope.isVisible = !scope.isVisible;
+                }
+                if(scope.isVisible){
+                   API.resetPushCount($rootScope.currentUser._id);
+                }
+                
        			});
+
        			
        		}
        		$(element).on('click', togglePopover);
